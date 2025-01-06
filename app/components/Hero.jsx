@@ -42,7 +42,7 @@ const Hero = () => {
                 </div>
             </div>
             <div className="col-span-5 place-self-center mt-5 lg:mt-0">
-                <div className="w-[280px] h-[280px] sm:w-[290px] sm:h-[290px] lg:w-[330px] lg:h-[330px] xl:w-[340px] xl:h-[340px] rounded-full overflow-hidden mx-auto">
+                <div className="w-[280px] h-[280px] sm:w-[290px] sm:h-[290px] lg:w-[325px] lg:h-[325px] xl:w-[330px] xl:h-[330px] rounded-full overflow-hidden mx-auto">
                     <img src="/images/profile_pic.jpg" alt="Profile picture" className="w-full h-full object-cover" />
                 </div>
             </div>

@@ -1,6 +1,8 @@
+"use client"
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 import NavList from "./NavList"
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid"
 
 const navElements = [
     {
@@ -22,22 +24,39 @@ const navElements = [
 ]
 
 const Navbar = () => {
-  return (
-    <nav>
-        <div className="flex flex-wrap items-center justify-between mx-auto p-8">
-            <Link href={"/"} className="text-5xl text-white font-semibold">NV</Link>
-            <div className="menu hidden md:block md:w-auto" id="navbar">
-                <ul>
-                    {navElements.map((element, index) => (
-                        <li key={index}>
-                            <NavList href={element.path} title={element.title} />
-                        </li>
-                    ))}
-                </ul>
+    const [navigationOpen, setNavigationOpen] = useState(false);
+
+    return (
+        <nav className="fixed top-0 left-0 right-0 z-10 bg-[#121212] bg-opacity-90">
+            <div className="flex flex-wrap items-center justify-between mx-auto px-5 pt-5">
+                <Link href={"/"} className="text-4xl lg:text-5xl text-white font-semibold">NV</Link>
+                <div className="mobile-menu block md:hidden">
+                    {
+                        navigationOpen ? (
+                            <button onClick={() => setNavigationOpen(false)} className="flex items-center px-3 py-2 border rounded border-slate-200 text-slate-200 hover:text-white hover:border-white">
+                                <XMarkIcon className="h-5 w-5" />
+                            </button>
+                        ) : (
+                            <button onClick={() => setNavigationOpen(true)} className="flex items-center px-3 py-2 border rounded border-slate-200 text-slate-200 hover:text-whit hover:border-white">
+                                <Bars3Icon className="h-5 w-5" />
+                            </button>
+                        )
+
+                    }
+                </div>
+                <div className="menu hidden md:block
+                md:w-auto" id="navbar">
+                    <ul className="flex p-4 md:p-0 md:pr-5 md:flex-row md:space-x-8 mt-0">
+                        {navElements.map((element, index) => (
+                            <li key={index}>
+                                <NavList href={element.path} title={element.title} />
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
-  )
+        </nav>
+    )
 }
 
 export default Navbar
