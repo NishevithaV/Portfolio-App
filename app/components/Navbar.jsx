@@ -1,8 +1,9 @@
 "use client"
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import NavList from "./NavList"
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid"
+import MenuOverlay from './MenuOverlay'
 
 const navElements = [
     {
@@ -26,8 +27,23 @@ const navElements = [
 const Navbar = () => {
     const [navigationOpen, setNavigationOpen] = useState(false);
 
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth >= 768) {
+                setNavigationOpen(false);
+            }
+        }
+
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        }
+    }, [])
+    
+
     return (
-        <nav className="fixed top-0 left-0 right-0 z-10 bg-[#121212] bg-opacity-90">
+        <nav className="fixed top-0 left-0 right-0 z-10 bg-[#121212] bg-opacity-100">
             <div className="flex flex-wrap items-center justify-between mx-auto px-5 pt-5">
                 <Link href={"/"} className="text-4xl lg:text-5xl text-white font-semibold">NV</Link>
                 <div className="mobile-menu block md:hidden">
@@ -55,6 +71,7 @@ const Navbar = () => {
                     </ul>
                 </div>
             </div>
+            {navigationOpen ? <MenuOverlay links={navElements} closeMenu={() => setNavigationOpen(false)} /> : null}
         </nav>
     )
 }
