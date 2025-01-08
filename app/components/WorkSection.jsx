@@ -3,9 +3,8 @@ import { WORKEXPERIENCE } from '../constants'
 
 const WorkSection = () => {
   return (
-    <section className="border-b border-neutral-900 pb-4">
-        <h1 className="my-20 text-center text-3xl">Work Experience</h1>
-        
+    <section id="work" className="border-b border-neutral-900 pb-4">
+        <h1 className="mt-16 mb-16 text-center text-2xl sm:text-3xl sm:mt-20 md:mt-28">Work Experience</h1>
         <div>
           {WORKEXPERIENCE.map((experience, index) => (
             <div key={index} className="mb-8 flex flex-wrap lg:justify-center">

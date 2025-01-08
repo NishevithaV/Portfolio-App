@@ -26,7 +26,7 @@ const Hero = () => {
                         repeat={Infinity}
                     />
                 </h1>
-                <p className="text-[#ADB7BE] text-base sm:text-lg mt-6 mb-6 lg:text-xl">Quisque volutpat justo ut mauris ultrices, in elementum velit malesuada. Aenean non lacus sit amet nunc sagittis fermentum. Fusce gravida, ligula nec tincidunt sodales, justo augue cursus urna, vitae pulvinar ligula purus nec nisl.</p>
+                <p className="text-[#ADB7BE] text-base sm:text-lg mt-6 mb-6 lg:text-xl">I’m a second-year Computer Science student at Dalhousie University with a love for building tech solutions that make a difference. This summer, I’ll be joining Morgan Stanley as a Technology Analyst, diving into the fast-paced world of fintech.</p>
                 <div className="flex space-x-3 mt-6 justify-center sm:justify-start">
                     <a href="https://github.com/NishevithaV" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-gradient-to-r from-teal-400 to-fuchsia-400 hover:scale-110 transition-transform duration-200">
                         <FontAwesomeIcon icon={faGithub} className="text-white" style={{ width: '28px', height: '28px' }} />
