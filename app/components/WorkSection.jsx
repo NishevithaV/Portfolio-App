@@ -1,11 +1,13 @@
 import React from 'react'
 import { WORKEXPERIENCE } from '../constants'
+import { motion } from 'framer-motion'
 
 const WorkSection = () => {
   return (
     <section id="work" className="border-b border-neutral-900 pb-4">
         <h1 className="mt-16 mb-12 text-center text-2xl sm:text-3xl sm:mt-20 md:mt-28">Work Experience</h1>
-        <div>
+
+        <div className="max-h-[480px] overflow-y-scroll scrollbar-thin scrollbar-thumb-fuchsia-400 scrollbar-track-white" style={{ scrollbarGutter: 'stable', WebkitOverflowScrolling: 'touch',}}>
           {WORKEXPERIENCE.map((experience, index) => (
             <div key={index} className="mb-8 flex flex-wrap lg:justify-center">
               <div className="w-full lg:w-1/4">
