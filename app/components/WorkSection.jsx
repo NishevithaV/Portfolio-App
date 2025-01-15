@@ -1,11 +1,17 @@
-import React from 'react'
-import { WORKEXPERIENCE } from '../constants'
-import { motion } from 'framer-motion'
+"use client";
+import React from 'react';
+import { WORKEXPERIENCE } from '../constants';
+import { motion } from 'framer-motion';
+import { MdOutlineMouse } from "react-icons/md";
 
 const WorkSection = () => {
   return (
     <section id="work" className="border-b border-neutral-900 pb-4">
-        <h1 className="mt-16 mb-12 text-center text-2xl sm:text-3xl sm:mt-20 md:mt-28">Work Experience</h1>
+        <motion.div className="flex items-center justify-center gap-2 mt-16 mb-12 sm:mt-20 md:mt-28" initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{duration: 1.8, ease: "easeOut" }} viewport={{ once: true, amount:0.8 }}>
+          <h1 className="text-2xl sm:text-3xl">Work Experience</h1>
+          <MdOutlineMouse className="text-fuchsia-400 w-8 h-8 md:w-9 md:h-9" />
+        </motion.div>
+        
 
         <div className="max-h-[480px] overflow-y-scroll scrollbar-thin scrollbar-thumb-fuchsia-400 scrollbar-track-white" style={{ scrollbarGutter: 'stable', WebkitOverflowScrolling: 'touch',}}>
           {WORKEXPERIENCE.map((experience, index) => (
