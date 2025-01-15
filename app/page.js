@@ -2,6 +2,7 @@ import Image from "next/image";
 import Hero from "./components/Hero";
 import Navbar from './components/Navbar'
 import WorkSection from "./components/WorkSection";
+import Projects from "./components/Projects";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
         <div className="pt-0 lg:pt-2 xl:pt-4">
           <WorkSection />
         </div>
+        <Projects />
       </div>
     </main>
   );
