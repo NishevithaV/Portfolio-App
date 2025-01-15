@@ -29,7 +29,7 @@ const Hero = () => {
                 </motion.h1>
                 <motion.p initial={{ opacity: 0}} animate={{ opacity: 1}} transition={{duration: 2, delay: 0.75 }} className="text-[#ADB7BE] text-base sm:text-lg mt-6 mb-6 sm-md:pr-4 lg:text-xl">I’m a second-year Computer Science student at Dalhousie University with a love for building tech solutions that make a difference. This summer, I’ll be joining Morgan Stanley as a Technology Analyst, diving into the fast-paced world of fintech.</motion.p>
 
-                <motion.div initial={{ x: 300, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ duration: 1.2, delay: 1, ease: "easeOut" }} className="flex space-x-3 mt-6 justify-center sm:justify-start">
+                <motion.div initial={{ x: -300, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ duration: 1.1, delay: 0.9, ease: "easeOut" }} className="flex space-x-3 mt-6 justify-center sm:justify-start">
                     <a href="https://github.com/NishevithaV" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-gradient-to-r from-teal-400 to-fuchsia-400 hover:scale-110 transition-transform duration-200">
                         <FontAwesomeIcon icon={faGithub} className="text-white" style={{ width: '28px', height: '28px' }} />
                     </a>
