@@ -21,3 +21,30 @@ export const WORKEXPERIENCE = [
         skills: ["Program Development", "Event Coordination", "Resource Management", "Team Collaboration"],
     },
 ];
+
+export const PROJECTS = [
+    {
+        id: 1,
+        title: "Preserving My Good Self Blog",
+        des: "A client blog built with STRAPI for CMS and React.js, offering a seamless and dynamic content management experience.",
+        img: "",
+        iconLists: [],
+        link: "https://www.preservingmygoodself.com/",
+    },
+    {
+        id: 2,
+        title: "SummaryAI",
+        des: "An AI-powered SaaS app for generating text summaries, featuring a responsive design, Redux state management, and efficient API integration.",
+        img: "",
+        iconLists: [],
+        link: "https://summaryai-app.netlify.app/",
+    },
+    {
+        id: 3,
+        title: "StockSentry",
+        des: "A GitHub-based stock tracker using Alpha Vantage and Pushbullet APIs to send daily push notifications on equity performance",
+        img: "",
+        iconLists: [],
+        link: "https://github.com/NishevithaV/StockSentry",
+    },
+];
