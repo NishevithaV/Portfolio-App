@@ -2,24 +2,37 @@
 import React from 'react';
 import { WORKEXPERIENCE } from '../constants';
 import { motion } from 'framer-motion';
-import { MdOutlineMouse } from "react-icons/md";
 
 const WorkSection = () => {
   return (
-    <section id="work" className="border-b border-neutral-900 pb-4">
-        <motion.div className="flex items-center justify-center gap-2 mt-16 mb-12 sm:mt-20 md:mt-28" initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{duration: 1.8, ease: "easeOut" }} viewport={{ once: true, amount:0.8 }}>
-          <h1 className="text-2xl sm:text-3xl">Work Experience</h1>
-          <MdOutlineMouse className="text-fuchsia-400 w-8 h-8 md:w-9 md:h-9" />
-        </motion.div>
+    <section id="work" className="border-b border-neutral-900 pb-4 mt-16 sm:mt-20 md:mt-28">
+  
+        <motion.h1 
+          whileInView={{ opacity: 1, y: 0 }} 
+          initial={{ opacity: 0, y: 100 }} 
+          transition={{duration: 1}} 
+          className="text-center text-2xl sm:text-3xl mb-16"
+          style={{ willChange: "transform", overflowX: "hidden" }}
+        >
+            Work Experience
+        </motion.h1>
         
-
-        <div className="max-h-[480px] overflow-y-scroll scrollbar-thin scrollbar-thumb-fuchsia-400 scrollbar-track-white" style={{ scrollbarGutter: 'stable', WebkitOverflowScrolling: 'touch',}}>
+        <div>
           {WORKEXPERIENCE.map((experience, index) => (
             <div key={index} className="mb-8 flex flex-wrap lg:justify-center">
-              <div className="w-full lg:w-1/4">
+              <motion.div 
+                whileInView={{opacity: 1, x: 0 }}
+                initial={{opacity: 0, x: -100}}
+                transition={{duration: 1}}
+                className="w-full lg:w-1/4">
                 <p className="mb-2 text-sm text-neutral-400">{experience.year}</p>
-              </div>
-              <div className="w-full max-w-xl lg:w-3/4">
+              </motion.div>
+              <motion.div 
+                whileInView={{opacity: 1, x: 0}}
+                initial={{opacity: 0, x: 100}}
+                transition={{duraton: 1}}
+                className="w-full max-w-xl lg:w-3/4"
+              >
                 <h6 className="mb-2 font-semibold">
                   {experience.role} - <span className="text-sm text-purple-100">
                     {experience.company}
@@ -27,9 +40,9 @@ const WorkSection = () => {
                 </h6>
                 <p className="mb-4 text-neutral-400">{experience.description}</p>
                 {experience.skills.map((skill, index) => (
-                  <span key={index} className="mr-2 mt-4 rounded bg-neutral-900 px-2 py-1 text-sm font=medium text-fuchsia-400">{skill}</span>
+                  <span key={index} className="mr-2 mt-4 rounded bg-neutral-900 px-2 py-1 text-sm font-medium text-fuchsia-400">{skill}</span>
                 ))}
-              </div>
+              </motion.div>
             </div>
           ))}
         </div>
