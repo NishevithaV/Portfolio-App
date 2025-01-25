@@ -5,7 +5,7 @@ import ProjectCard from './ProjectCard'
 const Projects = () => {
   return (
     <div className="py-20">
-        <h1 className="text-2xl sm:text-3xl text-white text-center">Recent Projects
+        <h1 className="text-2xl sm:text-3xl text-white text-center pb-8">Recent Projects
         </h1>
         
         <div>
