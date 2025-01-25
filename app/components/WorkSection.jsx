@@ -7,10 +7,11 @@ const WorkSection = () => {
   return (
     <section id="work" className="border-b border-neutral-900 pb-4 mt-16 sm:mt-20 md:mt-28">
   
-        <motion.h1 
+        <motion.h1
+          viewport={{ once: true }} 
           whileInView={{ opacity: 1, y: 0 }} 
           initial={{ opacity: 0, y: 100 }} 
-          transition={{duration: 1}} 
+          transition={{duration: 0.5}} 
           className="text-center text-2xl sm:text-3xl mb-16"
           style={{ willChange: "transform", overflowX: "hidden" }}
         >
@@ -24,6 +25,7 @@ const WorkSection = () => {
                 whileInView={{opacity: 1, x: 0 }}
                 initial={{opacity: 0, x: -100}}
                 transition={{duration: 1}}
+                viewport={{ once: true }}
                 className="w-full lg:w-1/4">
                 <p className="mb-2 text-sm text-neutral-400">{experience.year}</p>
               </motion.div>
@@ -31,6 +33,7 @@ const WorkSection = () => {
                 whileInView={{opacity: 1, x: 0}}
                 initial={{opacity: 0, x: 100}}
                 transition={{duraton: 1}}
+                viewport={{ once: true }}
                 className="w-full max-w-xl lg:w-3/4"
               >
                 <h6 className="mb-2 font-semibold">
