@@ -13,6 +13,7 @@ const Projects = () => {
           whileInView={{ opacity: 1, y: 0 }} 
           initial={{ opacity: 0, y: 100 }} 
           transition={{duration: 0.5}} 
+          viewport={{once : true}}
           className="text-2xl sm:text-3xl text-white text-center mb-10"
           style={{ willChange: "transform", overflowX: "hidden" }}>
             Recent Projects

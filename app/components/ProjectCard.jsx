@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 const ProjectCard = ({ title, desc, img, iconLists, link }) => {
   return (
-    <div className="flex flex-col justify-between bg-[#181818] rounded-xl overflow-hidden min-h-[400px]">
+    <div className="flex flex-col justify-between bg-[#181818] rounded-xl overflow-hidden h-full min-h-[400px]">
         <div 
             className="h-52 md:h-72 rounded-t-xl relative group"
             style={{backgroundImage: `url(${img})`, backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat",}}>
