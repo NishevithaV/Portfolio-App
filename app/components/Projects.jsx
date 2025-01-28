@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 const Projects = () => {
 
   return (
-    <div className="py-20">
+    <div className="py-20" id="projects">
         <motion.h1 
           whileInView={{ opacity: 1, y: 0 }} 
           initial={{ opacity: 0, y: 100 }} 
@@ -29,7 +29,7 @@ const Projects = () => {
               opacity: 1, 
               y: 0, 
               transition: {
-                staggerChildren: 0.5,
+                staggerChildren: 0.4,
               },
             },
           }}
