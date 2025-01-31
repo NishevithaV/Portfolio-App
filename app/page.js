@@ -3,6 +3,7 @@ import Hero from "./components/Hero";
 import Navbar from './components/Navbar'
 import WorkSection from "./components/WorkSection";
 import Projects from "./components/Projects";
+import ContactSection from "./components/ContactSection";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
           <WorkSection />
         </div>
         <Projects />
+        <ContactSection />
       </div>
     </main>
   );
