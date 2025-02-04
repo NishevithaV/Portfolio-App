@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 const WorkSection = () => {
   return (
-    <section id="work" className="border-b border-neutral-900 pb-4 mt-16 sm:mt-20 md:mt-28">
+    <section id="work" className="border-b border-neutral-900 pb-4 mt-12 sm:mt-20 md:mt-28">
   
         <motion.h1
           viewport={{ once: true }} 
