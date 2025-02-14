@@ -5,6 +5,18 @@ import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
 const ContactSection = () => {
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = {
+      email: e.target.email.value,
+      subject: e.target.subject.value,
+      message: e.target.message.value,
+    };
+    const JSONdata = JSON.stringify(data);
+    const endpoint = "/api/send";
+  }
+
   return (
     <section className="grid md:grid-cols-2 my-6 md:my-12 gap-4 sm:gap-y-12" id="contact">
         <div>

@@ -7,10 +7,10 @@ import { NextResponse } from "next/server";
 const resend = new Resend(process.env.RESEND_API_KEY);
 const fromEmail = process.env.FROM_EMAIL;
 
-export async function POST(request, res) {
-  const { body } = request;
-  const { email, subject, message } = body;
+export async function POST(request) {
   try {
+    const { email, subject, message } = await request.json;
+
     const { data, error } = await resend.emails.send({
       from: fromEmail,
       to: [email], 
@@ -26,11 +26,11 @@ export async function POST(request, res) {
     });
 
     if (error) {
-      return NextResponse.json({ error }, { status: 500 });
+      return NextResponse.json({ success: false, error }, { status: 500 });
     }
-
-    return NextResponse.json({ data }, { status: 200 });
+    return NextResponse.json({ success: true, data }, { status: 200 });
+    
   } catch (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ success: false, error: error.message }, { status: 400 });
   }
 }
