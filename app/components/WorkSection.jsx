@@ -11,7 +11,7 @@ const WorkSection = () => {
           viewport={{ once: true }} 
           whileInView={{ opacity: 1, y: 0 }} 
           initial={{ opacity: 0, y: 100 }} 
-          transition={{duration: 0.5}} 
+          transition={{duration: 1}} 
           className="text-center text-2xl sm:text-3xl mb-16"
           style={{ willChange: "transform", overflowX: "hidden" }}
         >
