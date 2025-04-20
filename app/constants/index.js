@@ -42,9 +42,17 @@ export const PROJECTS = [
     {
         id: 3,
         title: "StockSentry",
-        desc: "A GitHub-based stock tracker using Alpha Vantage and Pushbullet APIs to send daily push notifications on equity performance",
+        desc: "A GitHub-based stock tracker using Alpha Vantage and Pushbullet APIs to send daily push notifications on equity performance.",
         img: "/images/stocksentry-cover.png",
         iconLists: ["/python.svg", "/git.svg", "/rest.svg", "/pushbullet.svg"],
         link: "https://github.com/NishevithaV/StockSentry",
+    },
+    {
+        id: 4,
+        title: "Amazon API Scraper",
+        desc: "A lightweight Node.js and Express API that uses ScraperAPI to fetch Amazon product data, reviews, offers, and search results.",
+        img: "/images/amazon_logo.png",
+        iconLists: ["/nodejs-icon.svg", "/git.svg", "/rest.svg"],
+        link: "https://github.com/NishevithaV/Amazon-API-Scraper",
     },
 ];
