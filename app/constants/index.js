@@ -1,5 +1,12 @@
 export const WORKEXPERIENCE = [
     {
+        year:"May 2025 – Present",
+        role:"Technology Analyst",
+        company:"Morgan Stanley",
+        description: ``,
+        skills: [],
+    },
+    {
         year:"May 2024 – Aug 2024",
         role:"Software Developer Intern",
         company:"Silver Arrow Logistics Solutions Pvt Ltd.",
