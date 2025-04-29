@@ -3,7 +3,14 @@ export const WORKEXPERIENCE = [
         year:"May 2025 – Present",
         role:"Technology Analyst",
         company:"Morgan Stanley",
-        description: ``,
+        description: `Institutional Securities Technology (IST) and Finance, Risk, Programs & Production Engineering (FRPPE) Divisions.`,
+        skills: [],
+    },
+    {
+        year:"Feb 2025 – Present",
+        role:"Research Lead",
+        company:"Dalhousie University",
+        description: `Leading an independent research project to design a voice-enabled assistant focused on improving digital accessibility through speech-based navigation and system integration. Conducting user studies, market research, and defining system requirements to inform product development.`,
         skills: [],
     },
     {
