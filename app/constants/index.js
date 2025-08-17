@@ -1,38 +1,59 @@
 export const WORKEXPERIENCE = [
     {
-        year:"May 2025 – Present",
+        year:"May 2025 – Aug 2025",
         role:"Technology Analyst",
         company:"Morgan Stanley",
-        description: `Institutional Securities Technology (IST) and Finance, Risk, Programs & Production Engineering (FRPPE) Divisions.`,
-        skills: [],
+        description: [
+            "Implemented user analytics and responsive UI/UX for an investment dashboard with over 20k+ clients, with production features showcased at the NY Tech Expo.",
+            "Engineered a high-performance real-time search functionality in Lit, integrating APIs, message buses, and debounce logic to support 15k+ global users.",
+            "Delivered accessibility compliance and advanced analytics tracking, with accessibility features reaching 10% adoption in 2 months and analytics rolled out to clients within 6 weeks of release."
+        ],
+        skills: ["TypeScript", "Spring Boot", "Lit", "Angular", "Bootstrap", "Java", "Git", "Vim"],
     },
     {
         year:"Feb 2025 – Present",
         role:"Research Lead",
         company:"Dalhousie University",
-        description: `Leading an independent research project to design a voice-enabled assistant focused on improving digital accessibility through speech-based navigation and system integration. Conducting user studies, market research, and defining system requirements to inform product development.`,
+        description: [
+            "Leading an independent research project to design a voice-enabled assistant that enhances digital accessibility through speech-based navigation.",
+            "Conducting market research and user studies to identify usability barriers.",
+            "Defining technical requirements and integration strategies for seamless system deployment."
+        ],
         skills: [],
     },
     {
-        year:"May 2024 – Aug 2024",
-        role:"Software Developer Intern",
-        company:"Silver Arrow Logistics Solutions Pvt Ltd.",
-        description: `Engineered a middleware API to enhance real-time data processing, increasing throughput by 200 transactions per minute through RESTful API integration and rigorous testing with Postman. Designed AWS infrastructure with EC2 instances, boosting deployment efficiency by 40% and ensuring system reliability. Re-engineered data migration to DynamoDB with Drools rules, ensuring data integrity.`,
-        skills: ["AWS EC2","RESTful APIs","DynamoDB", "Postman", "Drools"],
+        year:"Feb 2024 – Jul 2025",
+        role:"Student Ambassador",
+        company:"ShiftKey Labs",
+        description: [
+            <>Coordinated a year-long student startup program in collaboration with Volta (featured <a href="https://lnkd.in/eXynyGYn" target="_blank" rel="noopener noreferrer" className="no-underline text-fuchsia-400">here</a>), overseeing logistics, recruiting early-stage founders, running monthly industry and mentorship sessions, and producing the final demo showcase</>,
+            "Organized hackathons, tech talks, and workshops in collaboration with the Faculty of Computer Science",
+            "Hosted speaker series and technical workshops to foster community, highlight diverse voices in tech, and spark conversations around topics like UI/UX, data science, and fintech"
+        ],
+        skills: ["Program Development", "Event Coordination", "Resource Management", "Team Collaboration"],
     },
     {
         year:"June 2024 – Aug 2024",
         role:"Freelance Web Developer",
         company:"Preserving My Good Self",
-        description: `Built a dynamic research portfolio website from scratch as a freelance project, using ReactJS for an interactive front-end and Strapi CMS for content management. Collaborated with a UI/UX designer to enhance user experience, reducing page load times by 1 second through responsive design optimizations. Deployed the site, automating the deployment pipeline to cut deployment time by 60% and seamlessly integrating the domain name.`,
+        description: [
+            "Developed a dynamic research portfolio website using ReactJS for front-end and Strapi CMS for content management.",
+            "Collaborated with a UI/UX designer to optimize user experience, integrating feedback and responsive design principles to improve page load times.",
+            "Ensured cross-browser compatibility and mobile responsiveness for a seamless user experience.",
+            "Deployed the website on Render, automating the deployment pipeline and streamlining the domain connection process."
+        ],
         skills: ["React.js", "CMS", "REST APIs", "HTML5", "CSS"],
     },
     {
-        year:"Feb 2024 – Present",
-        role:"Student Ambassador",
-        company:"ShiftKey Labs",
-        description: `Developed and led the Sandbox’s annual incubator program, securing 10 industry-led sessions and events to enhance project outcomes and entrepreneurial impact. Managed timelines and resources for startup teams, ensuring smooth progress from ideation to pitch presentations. Collaborated with the Faculty of Computer Science to organize large-scale tech events, including hackathons and workshops, engaging over 3,500 students.`,
-        skills: ["Program Development", "Event Coordination", "Resource Management", "Team Collaboration"],
+        year:"May 2024 – Aug 2024",
+        role:"Software Developer Intern",
+        company:"Silver Arrow Logistics Solutions Pvt Ltd.",
+        description: [
+            "Developed a middleware API to enhance real-time data processing with RESTful APIs.",
+            "Architected AWS infrastructure using EC2 instances for improved deployment efficiency.",
+            "Implemented a data migration strategy to DynamoDB, ensuring data integrity with Drools rules."
+        ],
+        skills: ["AWS EC2","RESTful APIs","DynamoDB", "Postman", "Drools"],
     },
 ];
 

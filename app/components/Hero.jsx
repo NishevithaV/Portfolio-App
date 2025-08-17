@@ -26,7 +26,7 @@ const Hero = () => {
                         repeat={Infinity}
                     />
                 </motion.h1>
-                <motion.p initial={{ opacity: 0}} animate={{ opacity: 1}} transition={{duration: 1, delay: 0.75 }} className="text-neutral-400 text-base sm:text-lg mt-6 mb-6 sm-md:pr-4 lg:text-xl">I’m an undergrad Computer Science student at Dalhousie University, currently interning at Morgan Stanley as a Technology Analyst. I’m passionate about building impactful solutions and using public speaking to spark meaningful conversations in the tech community.
+                <motion.p initial={{ opacity: 0}} animate={{ opacity: 1}} transition={{duration: 1, delay: 0.75 }} className="text-neutral-400 text-base sm:text-lg mt-6 mb-6 sm-md:pr-4 lg:text-xl">I’m a Computer Science student at Dalhousie University with full-stack development experience ranging from freelance work to Morgan Stanley. Beyond engineering, I’m passionate about mentoring and creating spaces for conversations in tech through panels, workshops, and building community.
 
 </motion.p>
 

@@ -41,7 +41,11 @@ const WorkSection = () => {
                     {experience.company}
                   </span>
                 </h6>
-                <p className="mb-4 text-neutral-400">{experience.description}</p>
+                <ul className="mb-4 text-neutral-400 list-disc">
+                {experience.description.map((item, idx) => (
+                  <li key={idx}>{item}</li>
+                ))}
+              </ul>
                 {experience.skills.map((skill, index) => (
                   <span key={index} className="mr-2 mt-4 rounded bg-neutral-900 px-2 py-1 text-sm font-medium text-fuchsia-400">{skill}</span>
                 ))}
