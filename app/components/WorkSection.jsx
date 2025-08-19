@@ -46,9 +46,16 @@ const WorkSection = () => {
                   <li key={idx}>{item}</li>
                 ))}
               </ul>
-                {experience.skills.map((skill, index) => (
-                  <span key={index} className="mr-2 mt-4 rounded bg-neutral-900 px-2 py-1 text-sm font-medium text-fuchsia-400">{skill}</span>
-                ))}
+              <div className="flex flex-wrap gap-2 mt-2">
+                  {experience.skills.map((skill, index) => (
+                    <span
+                      key={index}
+                      className="rounded bg-neutral-900 px-2 py-1 text-sm font-medium text-fuchsia-400"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+              </div>
               </motion.div>
             </div>
           ))}
