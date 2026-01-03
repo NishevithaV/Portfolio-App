@@ -11,17 +11,6 @@ export const WORKEXPERIENCE = [
         skills: ["TypeScript", "Spring Boot", "Lit", "Angular", "Bootstrap", "Java", "Git", "Vim"],
     },
     {
-        year:"Feb 2025 – Present",
-        role:"Research Lead",
-        company:"Dalhousie University",
-        description: [
-            "Leading an independent research project to design a voice-enabled assistant that enhances digital accessibility through speech-based navigation.",
-            "Conducting market research and user studies to identify usability barriers.",
-            "Defining technical requirements and integration strategies for seamless system deployment."
-        ],
-        skills: [],
-    },
-    {
         year:"Feb 2024 – Jul 2025",
         role:"Student Ambassador",
         company:"ShiftKey Labs",
