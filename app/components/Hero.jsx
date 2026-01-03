@@ -46,7 +46,7 @@ const Hero = () => {
             </div>
             <div className="col-span-5 place-self-center mt-5 lg:mt-0">
                 <motion.div initial={{ x: 300, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ duration: 1, delay:0.3, ease: "easeOut" }} className="w-[280px] h-[280px] sm:w-[290px] sm:h-[290px] lg:w-[325px] lg:h-[325px] xl:w-[330px] xl:h-[330px] rounded-full overflow-hidden mx-auto">
-                    <img src="/images/profile_pic.jpg" alt="Profile picture" className="w-full h-full object-cover" />
+                    <img src="/images/profile_pic.jpeg" alt="Profile picture" className="w-full h-full object-cover" />
                 </motion.div>
             </div>
         </div>
