@@ -1,7 +1,16 @@
 export const WORKEXPERIENCE = [
     {
-        year:"May 2025 – Aug 2025",
+        year:"Jan 2026 – Present",
         role:"Technology Analyst",
+        company:"Morgan Stanley",
+        description: [
+            
+        ],
+        skills: [],
+    },
+    {
+        year:"May 2025 – Aug 2025",
+        role:"Technology Analyst (Full-Stack)",
         company:"Morgan Stanley",
         description: [
             "Implemented user analytics and responsive UI/UX for an investment dashboard with over 20k+ clients, with production features showcased at the NY Tech Expo.",
