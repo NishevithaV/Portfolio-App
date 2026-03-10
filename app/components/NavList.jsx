@@ -4,9 +4,11 @@ const NavList = ({ href, title, onClick, isOverlay }) => {
     return (
         <Link
             href={href}
-            className={`block py-2 pl-3 pr-4 rounded md:p-0 text-[#ADB7BE] hover:text-white ${
-                isOverlay ? "text-[22px] sm:[24px]" : "text-[18px] sm:text-[19px]"
-              }`}
+            className={`block whitespace-nowrap rounded-full text-[#ADB7BE] hover:text-white transition-colors duration-200 ${
+                isOverlay
+                    ? "text-[22px] py-2 px-4"
+                    : "text-[15px] px-4 py-1.5 hover:bg-white/5"
+            }`}
             onClick={onClick}
         >
             {title}
