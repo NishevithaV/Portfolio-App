@@ -4,7 +4,7 @@ export const WORKEXPERIENCE = [
         role:"Technology Analyst",
         company:"Morgan Stanley",
         description: [
-            
+            "Applied AI/ML Software Development"
         ],
         skills: [],
     },
