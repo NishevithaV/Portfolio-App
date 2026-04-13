@@ -113,3 +113,46 @@ export const PROJECTS = [
         link: "https://github.com/NishevithaV/Amazon-API-Scraper",
     },
 ];
+
+export const TALKS = [
+    {
+        id: 1,
+        title: "Women in Tech Day: Cybersecurity Workshop",
+        type: "Workshop",
+        desc: "Hosted a workshop for high school students exploring cryptography, Caesar cipher, phishing attacks, and synthetic AI images, to show young women a place in tech.",
+        img: "/images/talks_images/cybersec_workshop.jpeg",
+        link: "https://www.linkedin.com/posts/nishevitha-venkatesh_i-had-the-opportunity-to-host-a-workshop-activity-7263306622230224898-_M4-?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAADVOMaMB41YPUsTNXkbPu0HTKxZ3ty1AXME",
+    },
+    {
+        id: 2,
+        title: "Intro to Python for NeuroTech",
+        type: "Workshop",
+        desc: "Led an Intro to Python workshop for SURGE Innovation, introducing curious minds to the intersection of neuroscience and code for the first time.",
+        img: "/images/talks_images/python_workshop.jpeg",
+        link: "https://www.linkedin.com/posts/nishevitha-venkatesh_wrapped-up-an-amazing-intro-to-python-for-ugcPost-7317727112897990657-lirg?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAADVOMaMB41YPUsTNXkbPu0HTKxZ3ty1AXME",
+    },
+    {
+        id: 3,
+        title: "Networking Fireside Chat",
+        type: "Panel",
+        desc: "Joined a fireside chat on the power of networking, sharing real stories and practical tips on building meaningful connections in tech.",
+        img: "/images/talks_images/networking_panel.jpeg",
+        link: "https://www.linkedin.com/posts/the-wisteria-project_womenintech-mentorship-computerscience-activity-7362228469247721473-wKQN?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAADVOMaMB41YPUsTNXkbPu0HTKxZ3ty1AXME",
+    },
+    {
+        id: 4,
+        title: "DevOpsDays Halifax",
+        type: "Conference Talk",
+        desc: "Spoke at DevOpsDays Halifax on how early-career developers think about DevOps, and why the environment around the tools matters just as much as the tools themselves for growth and impact.",
+        img: "/images/talks_images/devops.jpeg",
+        link: "https://www.linkedin.com/posts/nishevitha-venkatesh_devops-engineeringculture-ugcPost-7367742528403456000-KVVg?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAADVOMaMB41YPUsTNXkbPu0HTKxZ3ty1AXME",
+    },
+    {
+        id: 5,
+        title: "Tech Talk Atlantic: Crypto, Blockchain & AI",
+        type: "Conference Talk",
+        desc: "Unpacked how crypto, blockchain and AI are evolving in 2025, from Bitcoin fundamentals and decentralized trust to stablecoins, tokenization, and the crossover between AI and decentralized compute.",
+        img: "/images/talks_images/techtalkatlantic.jpeg",
+        link: "https://www.linkedin.com/posts/nishevitha-venkatesh_techtalk-emergingtech-share-7403074252503158784-0RvN?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAADVOMaMB41YPUsTNXkbPu0HTKxZ3ty1AXME",
+    },
+];
