@@ -62,7 +62,7 @@ export const PROJECTS = [
         desc: "An AI system that converts piano recordings into sheet music using a fine-tuned Transformer trained on the MAESTRO dataset.",
         img: "/images/harmonynet_cover.png",
         iconLists: ["/python.svg", "/pytorch.svg", "/musescore.svg"],
-        link: "https://github.com/NishevithaV/HarmonyNet",
+        link: "https://harmonynet.vercel.app/",
     },
     {
         id: 2,
