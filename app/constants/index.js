@@ -66,6 +66,14 @@ export const PROJECTS = [
     },
     {
         id: 2,
+        title: "ContextMirror",
+        desc: "An AI personal context engine that connects your calendar, messages, and health data to surface behavioral patterns and insights across your life.",
+        img: "/images/contextmirror_cover.png",
+        iconLists: ["/python.svg", "/react.svg", "/rest.svg"],
+        link: "https://github.com/NishevithaV/ContextMirror",
+    },
+    {
+        id: 3,
         title: "Fund Her Dream",
         desc: "A full-stack AI crowdfunding platform with LLM-generated pitch creation, Stripe payments, and real-time funding updates.",
         img: "/images/fundherdream_cover.png",
@@ -73,7 +81,7 @@ export const PROJECTS = [
         link: "https://fund-her-dream.vercel.app/",
     },
     {
-        id: 3,
+        id: 4,
         title: "QuickCash",
         desc: "A location-based Android marketplace connecting users with nearby taskers, featuring secure payments, real-time notifications, and a reputation system.",
         img: "/images/quickcash_cover.png",
@@ -81,7 +89,7 @@ export const PROJECTS = [
         link: "https://github.com/NishevithaV/Quick-Cash",
     },
     {
-        id: 4,
+        id: 5,
         title: "Preserving My Good Self Blog",
         desc: "A client blog built with STRAPI for CMS and React.js, offering a seamless and dynamic content management experience.",
         img: "/images/pmgs-cover.png",
@@ -89,7 +97,7 @@ export const PROJECTS = [
         link: "https://www.preservingmygoodself.com/",
     },
     {
-        id: 5,
+        id: 6,
         title: "StockSentry",
         desc: "A GitHub-based stock tracker using Alpha Vantage and Pushbullet APIs to send daily push notifications on equity performance.",
         img: "/images/stocksentry-cover.png",
@@ -97,7 +105,7 @@ export const PROJECTS = [
         link: "https://github.com/NishevithaV/StockSentry",
     },
     {
-        id: 6,
+        id: 7,
         title: "SummaryAI",
         desc: "An AI-powered SaaS app for generating text summaries, featuring a responsive design, Redux state management, and efficient API integration.",
         img: "/images/summaryai-cover.png",
@@ -105,7 +113,7 @@ export const PROJECTS = [
         link: "https://summaryai-app.netlify.app/",
     },
     {
-        id: 7,
+        id: 8,
         title: "Amazon API Scraper",
         desc: "A lightweight Node.js and Express API that uses ScraperAPI to fetch Amazon product data, reviews, offers, and search results.",
         img: "/images/amazon_logo.png",
