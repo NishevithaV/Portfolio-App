@@ -114,6 +114,17 @@ export const PROJECTS = [
     },
 ];
 
+export const ARTICLES = [
+    {
+        id: 1,
+        title: "Building an AI System for Piano Transcription",
+        type: "Deep Dive",
+        desc: "A technical deep dive into HarmonyNet, covering how I built an AI pipeline that converts raw piano recordings into readable sheet music.",
+        img: "/images/article_images/harmonynet_article.webp",
+        link: "https://medium.com/@nishevitha.v/building-an-ai-system-for-piano-transcription-b9e20d7490a8",
+    },
+];
+
 export const TALKS = [
     {
         id: 1,

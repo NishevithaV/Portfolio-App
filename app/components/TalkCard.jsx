@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline"
 
-const TalkCard = ({ title, desc, img, type, link }) => {
+const TalkCard = ({ title, desc, img, type, link, imgFit = "cover" }) => {
   const isLinked = link && link !== "#"
 
   const cardImage = (
@@ -10,9 +10,10 @@ const TalkCard = ({ title, desc, img, type, link }) => {
       className="h-56 md:h-64 rounded-t-xl relative group"
       style={{
         backgroundImage: `url(${img})`,
-        backgroundSize: "cover",
+        backgroundSize: imgFit,
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
+        backgroundColor: "#181818",
       }}
     >
       {type && (
