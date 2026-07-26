@@ -6,11 +6,11 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid"
 import MenuOverlay from './MenuOverlay'
 
 const navElements = [
-    { title: "Work", path: "/#work" },
-    { title: "Projects", path: "/#projects" },
-    { title: "Talks", path: "/talks" },
-    { title: "Articles", path: "/articles" },
-    { title: "Contact", path: "/#contact" },
+    { title: "work", path: "/#work" },
+    { title: "projects", path: "/#projects" },
+    { title: "talks", path: "/talks" },
+    { title: "articles", path: "/articles" },
+    { title: "contact", path: "/#contact" },
 ]
 
 const Navbar = () => {
@@ -28,15 +28,19 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className="fixed top-0 left-0 right-0 z-20 bg-[#121212] border-b border-neutral-800/60">
+            <nav className="fixed top-0 left-0 right-0 z-20 bg-term-bg/90 backdrop-blur-sm border-b border-term-line">
                 <div className="flex items-center justify-between px-4 sm:px-6 h-16">
-                    <Link href={"/"} className="text-3xl lg:text-4xl text-white font-semibold tracking-tight shrink-0">
-                        NV
+                    <Link href={"/"} className="font-mono text-lg lg:text-xl text-term-text tracking-tight shrink-0">
+                        <span className="text-term-accent">nishevitha</span>
+                        <span className="text-term-muted">@</span>
+                        <span className="text-term-accent-2">dev</span>
+                        <span className="text-term-muted">:~$</span>
+                        <span className="cursor-blink text-term-accent">_</span>
                     </Link>
 
                     {/* Mobile hamburger */}
                     <button
-                        className="md:hidden flex items-center px-3 py-2 border rounded border-slate-200 text-slate-200 hover:text-white hover:border-white"
+                        className="md:hidden flex items-center px-3 py-2 border rounded border-term-line text-term-text hover:text-term-accent hover:border-term-accent transition-colors"
                         onClick={() => setNavigationOpen(!navigationOpen)}
                         aria-label="Toggle menu"
                     >
@@ -46,9 +50,9 @@ const Navbar = () => {
                         }
                     </button>
 
-                    {/* Desktop nav — pill */}
-                    <div className="hidden md:flex items-center bg-[#1c1c1c] border border-neutral-700/60 rounded-full px-2 py-1.5">
-                        <ul className="flex items-center gap-1">
+                    {/* Desktop nav pill */}
+                    <div className="hidden md:flex items-center bg-term-surface border border-term-line rounded-full px-2 py-1.5">
+                        <ul className="flex items-center gap-1 font-mono">
                             {navElements.map((element, index) => (
                                 <li key={index}>
                                     <NavList href={element.path} title={element.title} />

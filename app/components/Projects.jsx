@@ -22,12 +22,21 @@ const Projects = () => {
 
   return (
     <div className="py-20" id="projects">
+      <motion.p
+        whileInView={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, y: 30 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true }}
+        className="text-center font-mono text-term-accent-2 text-sm mb-2"
+      >
+        <span className="text-term-muted">$</span> ls ./projects
+      </motion.p>
       <motion.h1
         whileInView={{ opacity: 1, y: 0 }}
         initial={{ opacity: 0, y: 100 }}
         transition={{ duration: 0.5 }}
         viewport={{ once: true }}
-        className="text-2xl sm:text-3xl text-white text-center mb-10"
+        className="text-2xl sm:text-3xl text-term-text text-center mb-10 font-semibold"
         style={{ willChange: "transform", overflowX: "hidden" }}>
         Recent Projects
       </motion.h1>
@@ -42,7 +51,7 @@ const Projects = () => {
               exit={{ opacity: 0, y: 20 }}
               transition={{ duration: 0.4, ease: "easeOut" }}
             >
-              <ProjectCard title={project.title} desc={project.desc} img={project.img} iconLists={project.iconLists} link={project.link} />
+              <ProjectCard title={project.title} desc={project.desc} iconLists={project.iconLists} link={project.link} />
             </motion.div>
           ))}
         </AnimatePresence>
@@ -52,13 +61,9 @@ const Projects = () => {
         <div className="flex justify-center mt-12">
           <button
             onClick={() => setShowAll(!showAll)}
-            className="group relative px-8 py-2.5 rounded-full text-sm font-medium text-white transition-all duration-300 bg-transparent"
+            className="group relative px-8 py-2.5 rounded-full font-mono text-sm font-medium text-term-text border border-term-line hover:border-term-accent bg-term-surface hover:text-term-accent transition-colors duration-300 glow-border-hover"
           >
-            <span className="absolute inset-0 rounded-full bg-gradient-to-r from-teal-400 to-fuchsia-400 opacity-100 transition-opacity duration-300" />
-            <span className="absolute inset-[1.5px] rounded-full bg-[#121212] transition-all duration-300 group-hover:bg-[#181818]" />
-            <span className="relative text-white/90 group-hover:text-white transition-colors duration-300 text-[15px] font-semibold tracking-wide">
-              {showAll ? "View Less" : "View More"}
-            </span>
+            {showAll ? "view_less --collapse" : "view_more --expand"}
           </button>
         </div>
       )}

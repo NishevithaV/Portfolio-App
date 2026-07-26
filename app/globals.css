@@ -3,19 +3,84 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --term-bg: #0a0d0b;
+  --term-surface: #101512;
+  --term-surface-2: #161d19;
+  --term-line: #1e2721;
+  --term-line-strong: #2a352e;
+  --term-muted: #7f9188;
+  --term-text: #e7f3ec;
+  --term-accent: #39ff88;
+  --term-accent-2: #ffb454;
+
+  --background: var(--term-bg);
+  --foreground: var(--term-text);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: var(--term-line);
 }
 
 body {
   color: var(--foreground);
-  background: var(--background);
+  background-color: var(--term-bg);
+  background-image:
+    linear-gradient(rgba(57, 255, 136, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(57, 255, 136, 0.05) 1px, transparent 1px);
+  background-size: 44px 44px;
+  background-attachment: fixed;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+::selection {
+  background: rgba(57, 255, 136, 0.3);
+  color: var(--term-text);
+}
+
+/* Terminal-style scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--term-bg);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--term-line-strong);
+  border-radius: 999px;
+  border: 2px solid var(--term-bg);
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--term-accent);
+}
+html {
+  scrollbar-color: var(--term-line-strong) var(--term-bg);
+}
+
+@keyframes cursor-blink {
+  0%, 45% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.cursor-blink {
+  animation: cursor-blink 1s steps(1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-blink {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+.text-glow {
+  text-shadow: 0 0 18px rgba(57, 255, 136, 0.35);
+}
+
+.glow-border {
+  box-shadow: 0 0 0 1px var(--term-line), 0 0 24px -8px rgba(57, 255, 136, 0.15);
+}
+
+.glow-border-hover:hover {
+  box-shadow: 0 0 0 1px rgba(57, 255, 136, 0.4), 0 0 32px -6px rgba(57, 255, 136, 0.35);
 }

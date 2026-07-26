@@ -13,6 +13,20 @@ const tailwindConfig = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        term: {
+          bg: "var(--term-bg)",
+          surface: "var(--term-surface)",
+          "surface-2": "var(--term-surface-2)",
+          line: "var(--term-line)",
+          "line-strong": "var(--term-line-strong)",
+          muted: "var(--term-muted)",
+          text: "var(--term-text)",
+          accent: "var(--term-accent)",
+          "accent-2": "var(--term-accent-2)",
+        },
+      },
+      fontFamily: {
+        mono: ["var(--font-jetbrains-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
       },
     },
   },

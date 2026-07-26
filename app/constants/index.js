@@ -1,57 +1,61 @@
 export const WORKEXPERIENCE = [
     {
-        year:"Jan 2026 – Present",
-        role:"Technology Analyst",
+        year:"Jan 2026 – Apr 2026",
+        role:"Technology Analyst (AI Engineering)",
         company:"Morgan Stanley",
         description: [
-            "Applied AI/ML Software Development"
+            "Built an autonomous AI agent that automates enterprise document processing, reducing a 24-hour developer workflow to 35 minutes.",
+            "Engineered a Spring-based intermediary service using an MQ broker to power an event-driven document processing pipeline."
         ],
-        skills: [],
+        skills: ["Agentic AI Development", "Distributed Systems", "LLM Agents", "MCP", "System Design"],
+    },
+    {
+        year:"Sep 2025 – Present",
+        role:"Co-Founder",
+        company:"W.A.T.T wire",
+        description: [
+            "Growing a women in tech community through a weekly article series and in-person events.",
+            "Organized Tech Sync, our first in-person event bringing together 140+ founders and builders in Montreal."
+        ],
+        skills: ["Community Building", "Event Planning", "Operations"],
     },
     {
         year:"May 2025 – Aug 2025",
-        role:"Technology Analyst (Full-Stack)",
+        role:"Technology Analyst (Full-Stack Engineering)",
         company:"Morgan Stanley",
         description: [
-            "Implemented user analytics and responsive UI/UX for an investment dashboard with over 20k+ clients, with production features showcased at the NY Tech Expo.",
-            "Engineered a high-performance real-time search functionality in Lit, integrating APIs, message buses, and debounce logic to support 15k+ global users.",
-            "Delivered accessibility compliance and advanced analytics tracking, with accessibility features reaching 10% adoption in 2 months and analytics rolled out to clients within 6 weeks of release."
+            "Implemented user analytics and responsive UI/UX for an investment dashboard serving 20k+ clients, with production features showcased at the NY Tech Expo.",
+            "Built a real-time search feature in Lit wired into a global message bus for 15k+ users."
         ],
-        skills: ["TypeScript", "Spring Boot", "Lit", "Angular", "Bootstrap", "Java", "Git", "Vim"],
+        skills: ["TypeScript", "Spring Boot", "Lit", "Angular", "Java"],
     },
     {
         year:"Feb 2024 – Jul 2025",
         role:"Student Ambassador",
         company:"ShiftKey Labs",
         description: [
-            <>Coordinated a year-long student startup program in collaboration with Volta (featured <a href="https://lnkd.in/eXynyGYn" target="_blank" rel="noopener noreferrer" className="no-underline text-fuchsia-400">here</a>), overseeing logistics, recruiting early-stage founders, running monthly industry and mentorship sessions, and producing the final demo showcase</>,
-            "Organized hackathons, tech talks, and workshops in collaboration with the Faculty of Computer Science",
-            "Hosted speaker series and technical workshops to foster community, highlight diverse voices in tech, and spark conversations around topics like UI/UX, data science, and fintech"
+            <>Led a year-long startup program with Volta for Atlantic Canada, supporting early-stage founders from recruitment to Demo Day (featured <a href="https://lnkd.in/eXynyGYn" target="_blank" rel="noopener noreferrer" className="no-underline text-term-accent">here</a>).</>,
+            "Organized hackathons, tech talks, workshops, and all things student startup community."
         ],
-        skills: ["Program Development", "Event Coordination", "Resource Management", "Team Collaboration"],
+        skills: ["Program Management", "Event Planning", "Resource Management", "Team Collaboration"],
     },
     {
-        year:"June 2024 – Aug 2024",
-        role:"Freelance Web Developer",
+        year:"Jun 2024 – Aug 2024",
+        role:"Web Developer",
         company:"Preserving My Good Self",
         description: [
-            "Developed a dynamic research portfolio website using ReactJS for front-end and Strapi CMS for content management.",
-            "Collaborated with a UI/UX designer to optimize user experience, integrating feedback and responsive design principles to improve page load times.",
-            "Ensured cross-browser compatibility and mobile responsiveness for a seamless user experience.",
-            "Deployed the website on Render, automating the deployment pipeline and streamlining the domain connection process."
+            "Developed a custom React/Strapi portfolio for a research client, collaborating closely with both the client and a UI/UX designer from concept to deployment."
         ],
-        skills: ["React.js", "CMS", "REST APIs", "HTML5", "CSS"],
+        skills: ["React.js", "Full-Stack Development", "Strapi CMS", "UI/UX Collaboration"],
     },
     {
         year:"May 2024 – Aug 2024",
-        role:"Software Developer Intern",
+        role:"Software Developer",
         company:"Silver Arrow Logistics Solutions Pvt Ltd.",
         description: [
-            "Developed a middleware API to enhance real-time data processing with RESTful APIs.",
-            "Architected AWS infrastructure using EC2 instances for improved deployment efficiency.",
-            "Implemented a data migration strategy to DynamoDB, ensuring data integrity with Drools rules."
+            "Engineered middleware APIs and AWS infrastructure for scalable real-time data processing and deployment."
         ],
-        skills: ["AWS EC2","RESTful APIs","DynamoDB", "Postman", "Drools"],
+        skills: ["Amazon EC2", "Postman API", "RESTful APIs", "AWS Infrastructure"],
     },
 ];
 
@@ -59,7 +63,7 @@ export const PROJECTS = [
     {
         id: 1,
         title: "HarmonyNet",
-        desc: "An AI system that converts piano recordings into sheet music using a fine-tuned Transformer trained on the MAESTRO dataset.",
+        desc: "A distributed AI system that converts piano recordings into sheet music using a fine-tuned Transformer trained on the MAESTRO dataset.",
         img: "/images/harmonynet_cover.png",
         iconLists: ["/python.svg", "/pytorch.svg", "/musescore.svg"],
         link: "https://harmonynet.vercel.app/",

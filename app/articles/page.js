@@ -8,7 +8,7 @@ import { PencilSquareIcon } from "@heroicons/react/24/outline";
 
 export default function Articles() {
   return (
-    <main className="flex min-h-screen flex-col bg-[#121212] pt-16">
+    <main className="flex min-h-screen flex-col bg-term-bg pt-16">
       <Navbar />
       <div className="container mx-auto px-6 sm:px-12 py-12 flex-1 flex flex-col">
         <motion.div
@@ -17,16 +17,19 @@ export default function Articles() {
           transition={{ duration: 0.7 }}
           className="flex flex-col items-center text-center mb-12"
         >
-          <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-teal-400 to-fuchsia-400 p-[2px] mb-6">
-            <div className="flex items-center justify-center w-full h-full rounded-full bg-[#181818]">
-              <PencilSquareIcon className="w-8 h-8 sm:w-10 sm:h-10 text-teal-400" />
+          <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-full border border-term-accent-2/30 bg-term-surface p-[2px] mb-6 glow-border">
+            <div className="flex items-center justify-center w-full h-full rounded-full bg-term-surface-2">
+              <PencilSquareIcon className="w-8 h-8 sm:w-10 sm:h-10 text-term-accent-2" />
             </div>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4">
+          <p className="font-mono text-term-accent-2 text-sm mb-2">
+            <span className="text-term-muted">$</span> ls ./articles
+          </p>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-term-text mb-4">
             Articles
           </h1>
-          <p className="text-lg sm:text-xl text-neutral-400 max-w-xl">
+          <p className="text-lg sm:text-xl text-term-muted max-w-xl">
             Technical deep dives, featured pieces, and things I&apos;m thinking about. Published on Medium and beyond.
           </p>
         </motion.div>

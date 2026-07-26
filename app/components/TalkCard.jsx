@@ -7,24 +7,24 @@ const TalkCard = ({ title, desc, img, type, link, imgFit = "cover" }) => {
 
   const cardImage = (
     <div
-      className="h-56 md:h-64 rounded-t-xl relative group"
+      className="h-56 md:h-64 rounded-t-xl relative group border-b border-term-line"
       style={{
         backgroundImage: `url(${img})`,
         backgroundSize: imgFit,
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
-        backgroundColor: "#181818",
+        backgroundColor: "var(--term-surface-2)",
       }}
     >
       {type && (
-        <span className="absolute top-3 left-3 text-xs font-medium px-3 py-1 rounded-full bg-[#121212]/80 text-fuchsia-400 border border-fuchsia-400/30">
+        <span className="absolute top-3 left-3 text-xs font-mono font-medium px-3 py-1 rounded-full bg-term-bg/80 text-term-accent border border-term-accent/30">
           {type}
         </span>
       )}
       {isLinked && (
-        <div className="overlay absolute inset-0 bg-[#181818] bg-opacity-0 hidden group-hover:flex group-hover:bg-opacity-80 transition-all duration-500 items-center justify-center rounded-t-xl">
-          <div className="h-14 w-14 border-2 rounded-full border-neutral-400 hover:border-white flex items-center justify-center group/icon">
-            <ArrowTopRightOnSquareIcon className="h-7 w-7 text-neutral-400 group-hover/icon:text-white" />
+        <div className="overlay absolute inset-0 bg-term-bg bg-opacity-0 hidden group-hover:flex group-hover:bg-opacity-80 transition-all duration-500 items-center justify-center rounded-t-xl">
+          <div className="h-14 w-14 border-2 rounded-full border-term-line hover:border-term-accent flex items-center justify-center group/icon">
+            <ArrowTopRightOnSquareIcon className="h-7 w-7 text-term-muted group-hover/icon:text-term-accent" />
           </div>
         </div>
       )}
@@ -32,11 +32,11 @@ const TalkCard = ({ title, desc, img, type, link, imgFit = "cover" }) => {
   )
 
   const content = (
-    <div className="flex flex-col bg-[#181818] rounded-xl overflow-hidden h-full">
+    <div className="flex flex-col bg-term-surface border border-term-line rounded-xl overflow-hidden h-full glow-border-hover transition-shadow duration-300">
       {cardImage}
       <div className="py-5 px-4 flex flex-col flex-grow">
-        <h5 className="text-white font-semibold text-base mb-2">{title}</h5>
-        <p className="text-neutral-400 text-sm leading-relaxed">{desc}</p>
+        <h5 className="text-term-text font-semibold text-base mb-2">{title}</h5>
+        <p className="text-term-muted text-sm leading-relaxed">{desc}</p>
       </div>
     </div>
   )
