@@ -1,5 +1,14 @@
 export const WORKEXPERIENCE = [
     {
+        year:"Sep 2026 – Present",
+        role:"Product Engineer",
+        company:"SnapTrade (YC W22)",
+        description: [
+            "Plaid for trading"
+        ],
+        skills: [],
+    },
+    {
         year:"Jan 2026 – Apr 2026",
         role:"Technology Analyst (AI Engineering)",
         company:"Morgan Stanley",
@@ -38,24 +47,6 @@ export const WORKEXPERIENCE = [
             "Organized hackathons, tech talks, workshops, and all things student startup community."
         ],
         skills: ["Program Management", "Event Planning", "Resource Management", "Team Collaboration"],
-    },
-    {
-        year:"Jun 2024 – Aug 2024",
-        role:"Web Developer",
-        company:"Preserving My Good Self",
-        description: [
-            "Developed a custom React/Strapi portfolio for a research client, collaborating closely with both the client and a UI/UX designer from concept to deployment."
-        ],
-        skills: ["React.js", "Full-Stack Development", "Strapi CMS", "UI/UX Collaboration"],
-    },
-    {
-        year:"May 2024 – Aug 2024",
-        role:"Software Developer",
-        company:"Silver Arrow Logistics Solutions Pvt Ltd.",
-        description: [
-            "Engineered middleware APIs and AWS infrastructure for scalable real-time data processing and deployment."
-        ],
-        skills: ["Amazon EC2", "Postman API", "RESTful APIs", "AWS Infrastructure"],
     },
 ];
 
