@@ -16,7 +16,7 @@ export default function Talks() {
           transition={{ duration: 0.7 }}
           className="mb-16 border-b border-ink pb-8"
         >
-          <p className="fig-label mb-3">NO. 003 &mdash; SPEAKING</p>
+          <p className="fig-label mb-3">NO. 003 / SPEAKING</p>
           <h1 className="font-display uppercase text-5xl sm:text-6xl lg:text-7xl font-extrabold text-ink tracking-tight mb-4">
             Talks
           </h1>

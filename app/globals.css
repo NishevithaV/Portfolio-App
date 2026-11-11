@@ -263,3 +263,41 @@ html[data-intro="pending"]::before {
 .scrim-ink {
   background-color: color-mix(in srgb, var(--ink) 72%, transparent);
 }
+
+/* Text that warms to the accent as it scrolls into view (company names and
+   similar), the typographic counterpart of `.reveal-colour`. `is-live` is set
+   by ColourOnScroll; hover still applies for pointer users. */
+
+.reveal-accent {
+  color: var(--muted);
+  transition: color 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-accent.is-live,
+.group:hover .reveal-accent {
+  color: var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-accent {
+    color: var(--accent);
+  }
+}
+
+/* Technology marks on project cards.
+
+   The logo set is inconsistent: ten of them are solid `fill="white"` (so they
+   disappeared on the white card) while next.svg is solid black (so it would
+   disappear on any dark chip). `brightness(0)` collapses whatever the source
+   colour is to black, which is the only treatment that renders every file
+   legibly, and it keeps these small marks inside the monochrome system. */
+
+.tech-mark {
+  filter: brightness(0) saturate(100%);
+  opacity: 0.55;
+  transition: opacity 0.3s ease;
+}
+
+.group:hover .tech-mark {
+  opacity: 1;
+}

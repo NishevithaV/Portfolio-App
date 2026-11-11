@@ -59,7 +59,7 @@ const Navbar = () => {
             : 'surface-translucent border-b border-line backdrop-blur-md'
         }`}
       >
-        <div className="flex h-16 items-center justify-between px-6 sm:px-10">
+        <div className="container mx-auto flex h-16 items-center justify-between px-6 sm:px-12">
           <Link
             href="/"
             data-cursor="link"

@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic'
 import { useReducedMotion } from 'framer-motion'
 import SmoothScroll, { ScrollGate } from './SmoothScroll'
 import Cursor from './Cursor'
+import ColourOnScroll from './ColourOnScroll'
 
 const ScreenPusher = dynamic(() => import('./loader/ScreenPusher'), { ssr: false })
 
@@ -53,6 +54,7 @@ const SiteChrome = ({ children }) => {
       <ScrollGate locked={intro === true} />
       {children}
       <Cursor />
+      <ColourOnScroll active={intro === false} />
       {intro === true && <ScreenPusher onDone={handleDone} reduced={!!reduced} />}
     </SmoothScroll>
   )

@@ -47,7 +47,7 @@ const ProjectCard = ({ title, desc, img, iconLists = [], link }) => {
                     src={icon}
                     alt=""
                     aria-hidden="true"
-                    className="reveal-colour h-[16px] w-[16px]"
+                    className="tech-mark h-[17px] w-[17px]"
                   />
                 ))}
               </div>

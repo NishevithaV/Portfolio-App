@@ -66,7 +66,7 @@ const ContactSection = () => {
             viewport={{ once: true }}
           >
             Have questions, ideas or opportunities? I&apos;m excited to hear from
-            you &mdash; send me a message.
+            you. Send me a message.
           </motion.p>
 
           <motion.div

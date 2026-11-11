@@ -11,7 +11,7 @@ const Footer = () => {
         </p>
 
         <p className="fig-label sm:text-right">
-          &copy; {year} Nishevitha Venkatesh &mdash; Built with Next.js &amp; three.js
+          &copy; {year} Nishevitha Venkatesh. Built with Next.js &amp; three.js
         </p>
       </div>
     </footer>

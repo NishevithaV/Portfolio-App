@@ -61,21 +61,15 @@ export default function RootLayout({ children }) {
           CSS cover in globals.css can hold the screen until the React overlay
           mounts. Without this the inverted hero flashes on every load.
         */}
-        {/*
-          The hero's 3D wordmark fetches this typeface as soon as it mounts.
-          Preloading it here means the geometry is ready the moment the intro
-          clears, instead of the hero briefly rendering empty.
-        */}
-        <link
-          rel="preload"
-          as="fetch"
-          href="/fonts/big-shoulders-800.typeface.json"
-          crossOrigin="anonymous"
-        />
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "(function(){try{document.documentElement.dataset.intro=sessionStorage.getItem('nv.intro.played')==='1'?'done':'pending'}catch(e){document.documentElement.dataset.intro='pending'}})();",
+              "(function(){var d=document.documentElement;try{d.dataset.intro=sessionStorage.getItem('nv.intro.played')==='1'?'done':'pending'}catch(e){d.dataset.intro='pending'}" +
+              // Failsafe: the cover is only lifted when the React intro mounts.
+              // If the bundle is slow, errors, or never arrives, the visitor
+              // would otherwise be left staring at a blank white screen, so
+              // retire it unconditionally after a few seconds.
+              "setTimeout(function(){if(d.dataset.intro==='pending'){d.dataset.intro='done'}},5000);})();",
           }}
         />
         <SiteChrome>{children}</SiteChrome>

@@ -27,10 +27,15 @@ import FitCamera from './FitCamera'
  * fixed-length animation: if the page is slow, the figure strains for longer.
  */
 
-const WIND_UP_MS = 1000
-const SHOVE_MS = 1200
+const WIND_UP_MS = 1900 // the figure braces and strains; the counter runs
+const SHOVE_MS = 1700 // the push, and the panel leaving the viewport
 const READY_CAP_MS = 2500 // never strain for longer than this waiting on fonts
-const SKIP_MS = 450
+const SKIP_MS = 520
+
+// Nothing can skip the intro during this opening window. Without it the very
+// keystroke that triggered the reload (Cmd+R auto-repeating into the new
+// document) lands on the fresh page and dismisses the intro instantly.
+const SKIP_GRACE_MS = 900
 
 const PANEL_EASE = cubicBezier(0.7, 0, 0.3, 1)
 
@@ -41,9 +46,9 @@ const ScreenPusher = ({ onDone, reduced = false }) => {
   const rig = useRef(null)
 
   // Panel (and therefore the whole overlay) leaves in the back half of leg 2.
-  const y = useTransform(progress, [0.52, 1], ['0vh', '-118vh'], { ease: PANEL_EASE })
+  const y = useTransform(progress, [0.56, 1], ['0vh', '-118vh'], { ease: PANEL_EASE })
   // A faint compression as the figure loads up, released by the shove.
-  const panelScale = useTransform(progress, [0, 0.45, 0.66], [1, 0.986, 1])
+  const panelScale = useTransform(progress, [0, 0.45, 0.62], [1, 0.975, 1])
   const counter = useTransform(progress, [0, 0.5], [0, 100], { clamp: true })
   const barScale = useTransform(progress, [0, 0.5], [0, 1], { clamp: true })
 
@@ -86,14 +91,19 @@ const ScreenPusher = ({ onDone, reduced = false }) => {
 
     run()
 
-    // ---- skip: click, Escape, or any key -----------------------------------
+    // ---- skip: a deliberate click, or Escape/Enter/Space --------------------
+    // Deliberately NOT "any key": modifier and navigation keys left over from
+    // the reload that loaded this page would otherwise dismiss it immediately.
+    const startedAt = performance.now()
+
     const skip = () => {
       if (skippedRef.current || cancelled) return
+      if (performance.now() - startedAt < SKIP_GRACE_MS) return
       skippedRef.current = true
       current?.stop()
       const remaining = 1 - progress.get()
       animate(progress, 1, {
-        duration: (SKIP_MS / 1000) * Math.max(remaining, 0.35),
+        duration: (SKIP_MS / 1000) * Math.max(remaining, 0.4),
         ease: 'easeInOut',
         onComplete: () => {
           if (!cancelled) onDone()
@@ -101,14 +111,19 @@ const ScreenPusher = ({ onDone, reduced = false }) => {
       })
     }
 
+    const onKeyDown = (e) => {
+      if (e.metaKey || e.ctrlKey || e.altKey || e.repeat) return
+      if (['Escape', 'Enter', ' ', 'Spacebar'].includes(e.key)) skip()
+    }
+
     window.addEventListener('pointerdown', skip)
-    window.addEventListener('keydown', skip)
+    window.addEventListener('keydown', onKeyDown)
 
     return () => {
       cancelled = true
       current?.stop()
       window.removeEventListener('pointerdown', skip)
-      window.removeEventListener('keydown', skip)
+      window.removeEventListener('keydown', onKeyDown)
     }
   }, [progress, onDone, reduced])
 
@@ -117,6 +132,13 @@ const ScreenPusher = ({ onDone, reduced = false }) => {
     const previous = document.body.style.overflow
     document.body.style.overflow = 'hidden'
 
+    // The intro only plays on the first load of a session, and it should hand
+    // over at the top of the page. The browser restores the previous scroll
+    // position after reload, which would otherwise drop the visitor halfway
+    // down the page the moment the panel lifts.
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual'
+    window.scrollTo(0, 0)
+
     // This overlay is opaque and covers the viewport, so the pre-paint CSS
     // cover from layout.js has done its job and must step aside - otherwise it
     // would still be there after the panel slides away.
@@ -124,6 +146,9 @@ const ScreenPusher = ({ onDone, reduced = false }) => {
 
     return () => {
       document.body.style.overflow = previous
+      // Hand scroll restoration back, or every later back/forward navigation
+      // in this session would lose its position too.
+      if ('scrollRestoration' in history) history.scrollRestoration = 'auto'
     }
   }, [])
 
@@ -151,22 +176,19 @@ const ScreenPusher = ({ onDone, reduced = false }) => {
         style={{ scaleY: panelScale, originY: 0 }}
         className="relative flex-1 overflow-hidden bg-white"
       >
-        <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-6 px-6 pb-6 sm:px-10 sm:pb-8">
-          <div>
-            <p className="font-mono text-[0.65rem] uppercase tracking-[0.22em] text-[#6e6e6e]">
-              Nishevitha Venkatesh
-            </p>
-            <p className="mt-1 font-mono text-[0.65rem] uppercase tracking-[0.22em] text-[#b2b2b2]">
-              Portfolio &mdash; Rev. 2026
-            </p>
-          </div>
+        <div className="absolute inset-x-0 top-0 flex items-start justify-between gap-6 px-6 pt-6 sm:px-10 sm:pt-8">
+          <p className="font-mono text-[0.65rem] uppercase tracking-[0.22em] text-[#b2b2b2]">
+            Portfolio
+          </p>
           <p
-            className="font-display text-5xl font-extrabold leading-none tracking-tight text-[#111] tabular-nums sm:text-7xl"
+            className="font-mono text-[0.65rem] uppercase tracking-[0.22em] tabular-nums text-[#6e6e6e]"
             aria-hidden="true"
           >
-            {String(pct).padStart(3, '0')}
+            {String(pct).padStart(3, '0')} / 100
           </p>
         </div>
+
+
 
         {/* loading rule */}
         <div className="absolute inset-x-0 bottom-0 h-px bg-[rgba(17,17,17,0.14)]">
@@ -178,7 +200,7 @@ const ScreenPusher = ({ onDone, reduced = false }) => {
       </motion.div>
 
       {/* ---- the figure doing the pushing ---- */}
-      <div className="relative h-[clamp(190px,34vh,330px)] shrink-0">
+      <div className="relative h-[clamp(210px,32vh,340px)] shrink-0">
         {/* The canvas stops short of the hint line so the figure's feet are
             never overlapped by it; FitCamera re-fits to whatever height it gets. */}
         <div className="absolute inset-x-0 bottom-8 top-0">
@@ -192,12 +214,12 @@ const ScreenPusher = ({ onDone, reduced = false }) => {
           <directionalLight position={[2.6, 4.2, 3.2]} intensity={2.3} />
           <directionalLight position={[-3.2, 1.2, 2]} intensity={0.45} />
           <Figure progress={progress} rigRef={rig} />
-          <FitCamera target={rig} />
+          <FitCamera target={rig} margin={1.13} bias={0.02} />
         </Canvas>
         </div>
 
         <p className="pointer-events-none absolute inset-x-0 bottom-3 text-center font-mono text-[0.6rem] uppercase tracking-[0.22em] text-[#5a5a5a]">
-          Click anywhere to skip
+          Click or press Esc to skip
         </p>
       </div>
     </motion.div>

@@ -13,13 +13,21 @@ import * as THREE from 'three'
  * scroll, so its position is a readout of where you are in the timeline rather
  * than decoration.
  *
- * Colour follows the site rule: the cube is white and only takes on the accent
- * while it is being hovered.
+ * Colour follows the site rule, but arrives with scroll rather than only on
+ * hover: the cube is cold white as the section opens and warms toward the
+ * accent as you travel down the timeline. Hovering pushes it the rest of the
+ * way immediately.
  */
 
 const INK = new THREE.Color('#111111')
-const ACCENT = new THREE.Color('#b2311c')
-const FACE = '#f7f7f7'
+// Exactly the page accent, so the cube matches the company names beside it.
+// The lights below deliberately sum to roughly 1.0: any brighter and the lit
+// faces multiply past the base colour, which desaturates red into dusty pink.
+const RED = new THREE.Color('#b2311c')
+const FACE = new THREE.Color('#f7f7f7')
+
+// Scratch colour, reused each frame so the loop allocates nothing.
+const TARGET = new THREE.Color()
 
 const QUARTER = Math.PI / 2
 
@@ -54,7 +62,19 @@ const Cube = ({ progress, count, reduced }) => {
     }
 
     if (material.current) {
-      material.current.emissive.lerp(hovered && !reduced ? ACCENT : INK, 1 - Math.pow(0.004, d))
+      // Warm up across the section, and jump the rest of the way on hover.
+      const warmth = hovered && !reduced ? 1 : THREE.MathUtils.clamp(p / 0.1, 0, 1)
+      const rate = 1 - Math.pow(0.004, d)
+
+      // Drive the base colour, not just the emissive: emissive alone over a
+      // white face only ever tints it pink, so the cube has to actually
+      // become red for the accent to read.
+      TARGET.copy(FACE).lerp(RED, warmth)
+      material.current.color.lerp(TARGET, rate)
+
+      TARGET.copy(INK).lerp(RED, warmth)
+      material.current.emissive.lerp(TARGET, rate)
+      material.current.emissiveIntensity = 0.04 + warmth * 0.1
     }
   })
 
@@ -78,9 +98,9 @@ const Cube = ({ progress, count, reduced }) => {
       <RoundedBox args={[1.6, 1.6, 1.6]} radius={0.1} smoothness={4}>
         <meshStandardMaterial
           ref={material}
-          color={FACE}
-          roughness={0.5}
-          metalness={0.05}
+          color="#f7f7f7"
+          roughness={0.7}
+          metalness={0}
           emissive={INK}
           emissiveIntensity={0.5}
         />
@@ -108,13 +128,18 @@ const WorkCuboid3D = ({ progress, count = 1, reduced = false, size = 92 }) => {
   return (
     <div style={{ width: size, height: size }} className="shrink-0" aria-hidden="true">
       <Canvas
+        // `flat` = NoToneMapping. R3F defaults to ACES filmic, which rolls off
+        // and desaturates saturated colours - it was turning the accent into a
+        // dusty brick however the lights were set. Without it the surface
+        // renders the token colour it is actually given.
+        flat
         dpr={[1, 2]}
         gl={{ alpha: true, antialias: true }}
         camera={{ position: [1.9, 1.3, 2.9], fov: 32 }}
       >
-        <ambientLight intensity={0.65} />
-        <directionalLight position={[2.5, 3.5, 2.5]} intensity={2.1} />
-        <directionalLight position={[-2.5, -1, 1.5]} intensity={0.5} />
+        <ambientLight intensity={0.78} />
+        <directionalLight position={[2.5, 3.5, 2.5]} intensity={0.5} />
+        <directionalLight position={[-2.5, -1, 1.5]} intensity={0.12} />
         <Cube progress={progress} count={count} reduced={reduced} />
       </Canvas>
     </div>

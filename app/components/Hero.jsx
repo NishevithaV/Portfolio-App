@@ -1,41 +1,19 @@
 "use client"
 import React from 'react'
-import dynamic from 'next/dynamic'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { motion, useReducedMotion } from 'framer-motion'
 import RoleRotator from './RoleRotator'
-import useSectionProgress from '../hooks/useSectionProgress'
 
 /**
  * Inverted full-height hero.
  *
- * The visible wordmark is WebGL, so a plain `<h1>` is kept in the DOM for
- * search engines and screen readers and the canvas is marked decorative. The
- * same DOM wordmark doubles as the loading state for the 3D chunk, so the hero
- * is never blank and never wrong.
+ * The name is set as ordinary type at the head of the copy block rather than
+ * as a separate animated centrepiece: one typographic hierarchy, name then
+ * rotating role then the line about the work, with nothing competing for
+ * attention in the middle of the screen.
  */
-
-const DomWordmark = ({ dim = false }) => (
-  <div className="pointer-events-none flex h-full w-full items-center justify-center px-6">
-    <p
-      aria-hidden="true"
-      className={`font-display text-center font-extrabold uppercase leading-[0.84] tracking-tight text-ink transition-opacity duration-500 ${
-        dim ? 'opacity-30' : 'opacity-100'
-      } text-[clamp(2.6rem,13vw,11rem)]`}
-    >
-      Nishevitha
-      <br />
-      Venkatesh
-    </p>
-  </div>
-)
-
-const NameType3D = dynamic(() => import('./three/NameType3D'), {
-  ssr: false,
-  loading: () => <DomWordmark />,
-})
 
 const SOCIALS = [
   { href: 'https://github.com/NishevithaV', label: 'GitHub', icon: faGithub },
@@ -48,51 +26,49 @@ const SOCIALS = [
 ]
 
 const Hero = () => {
-  const [ref, progress] = useSectionProgress(['start start', 'end start'])
   const reduced = useReducedMotion()
 
   return (
     <section
       id="hero"
-      ref={ref}
       className="invert-section relative flex min-h-[100svh] w-full flex-col overflow-hidden"
     >
-      {/* The real heading, for search engines and assistive tech. */}
-      <h1 className="sr-only">Nishevitha Venkatesh &mdash; Product Engineer</h1>
-
-      {/* ---- top rule ---- */}
-      <div className="flex shrink-0 items-baseline justify-between px-6 pb-2 pt-24 sm:px-10 sm:pt-28">
-        <span className="fig-label">No. 001 &mdash; Portfolio</span>
-        <span className="fig-label">Rev. 2026</span>
+      <div className="container mx-auto shrink-0 px-6 pt-20 sm:px-12 sm:pt-24">
+        <span className="fig-label">No. 001 / Portfolio</span>
       </div>
 
-      {/* ---- the 3D wordmark gets the flexible middle, so it can never
-              collide with the copy below it ---- */}
-      <div className="relative min-h-0 flex-1">
-        <div className="absolute inset-0">
-          <NameType3D scrollProgress={progress} reduced={!!reduced} />
-        </div>
-      </div>
+      {/* Main block, centred in the space between the label and the scroll cue.
 
-      {/* ---- the copy ---- */}
-      <div className="shrink-0 px-6 pb-8 sm:px-10 sm:pb-10">
-        <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
+          A 12-column grid rather than two flex children pushed apart: the gap
+          between the copy and the portrait is then a deliberate column of the
+          same grid everything else uses, instead of whatever space happens to
+          be left over at a given window width. */}
+      <div className="container mx-auto flex min-h-0 flex-1 items-center px-6 py-10 sm:px-12">
+        <div className="grid w-full grid-cols-1 items-center gap-10 sm:grid-cols-12 sm:gap-6">
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="max-w-xl"
+            className="min-w-0 sm:col-span-8 lg:col-span-7"
           >
-            <RoleRotator />
+            {/* The name reads as the standing label and the rotating role is
+                the headline, rather than the other way round. */}
+            <h1 className="font-display text-[clamp(1.05rem,2vw,1.6rem)] font-bold uppercase leading-none tracking-[0.04em] text-ink">
+              Nishevitha Venkatesh
+            </h1>
 
-            <div className="doc-rule mb-5 mt-3 w-full max-w-xs" />
+            <div className="mt-4">
+              <RoleRotator />
+            </div>
 
-            <p className="max-w-md font-serif text-base leading-relaxed text-muted">
+            <div className="doc-rule my-6 w-full max-w-sm" />
+
+            <p className="max-w-lg font-serif text-base leading-relaxed text-muted">
               I&rsquo;m a software engineer who likes turning hard problems into
               products people actually use.
             </p>
 
-            <div className="mt-6 flex gap-3">
+            <div className="mt-7 flex gap-3">
               {SOCIALS.map((s) => (
                 <a
                   key={s.label}
@@ -109,13 +85,16 @@ const Hero = () => {
             </div>
           </motion.div>
 
-          {/* Portrait: monochrome until you touch it - the colour rule, stated
-              immediately so the rest of the page reads as intentional. */}
+          {/* Width comes from the grid column, so it scales smoothly instead of
+              sticking at the floor of a clamp, and it is centred against the
+              copy rather than dropped into the bottom corner. It is also no
+              longer hidden below sm - vanishing at one width was the other half
+              of it "changing size and disappearing". */}
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.25 }}
-            className="group hidden w-[130px] shrink-0 sm:block lg:w-[150px]"
+            className="group w-[160px] max-w-full sm:col-span-4 sm:col-start-9 sm:ml-auto sm:w-full sm:max-w-[320px]"
           >
             <div
               className="relative aspect-[4/5] w-full overflow-hidden border border-line"
@@ -128,11 +107,13 @@ const Hero = () => {
                 className="reveal-colour h-full w-full object-cover"
               />
             </div>
-            <p className="fig-label mt-2">Fig. 1 &mdash; The author</p>
+            <p className="fig-label mt-2">Fig. 1 / The author</p>
           </motion.div>
         </div>
+      </div>
 
-        <div className="mt-8 flex items-center justify-between border-t border-line pt-4">
+      <div className="container mx-auto shrink-0 px-6 pb-8 sm:px-12 sm:pb-10">
+        <div className="flex items-center justify-between border-t border-line pt-4">
           <span className="fig-label">Scroll to begin</span>
           <motion.span
             aria-hidden="true"

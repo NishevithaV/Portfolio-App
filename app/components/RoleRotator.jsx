@@ -2,7 +2,15 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 
-const WORDS = ["BUILDER", "SOFTWARE ENGINEER", "PROBLEM SOLVER"]
+const WORDS = ["BUILDER", "SOFTWARE ENGINEER"]
+
+// The box is sized to the longest word and the animating word is absolutely
+// positioned inside it. With `mode="wait"` there is a beat where no word is
+// mounted at all; without this reservation the heading collapsed to zero on
+// every swap, which shifted the copy and visibly nudged the portrait beside it.
+const LONGEST = WORDS.reduce((a, b) => (b.length > a.length ? b : a))
+
+const TYPE = 'font-display uppercase font-extrabold leading-[0.95] tracking-tight text-[clamp(2rem,4.6vw,3.6rem)]'
 
 const RoleRotator = () => {
   const [index, setIndex] = useState(0)
@@ -12,13 +20,13 @@ const RoleRotator = () => {
   const my = useMotionValue(0.5)
   const springX = useSpring(mx, { stiffness: 120, damping: 20 })
   const springY = useSpring(my, { stiffness: 120, damping: 20 })
-  const rotateX = useTransform(springY, [0, 1], [10, -10])
-  const rotateY = useTransform(springX, [0, 1], [-14, 14])
+  const rotateX = useTransform(springY, [0, 1], [8, -8])
+  const rotateY = useTransform(springX, [0, 1], [-10, 10])
 
   useEffect(() => {
     const id = setInterval(() => {
       setIndex((i) => (i + 1) % WORDS.length)
-    }, 2400)
+    }, 2600)
     return () => clearInterval(id)
   }, [])
 
@@ -39,21 +47,25 @@ const RoleRotator = () => {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{ perspective: 900 }}
-      className="py-2"
     >
-      <motion.div style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}>
+      <motion.div style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }} className="relative">
+        {/* Invisible sizer: reserves the exact space the longest word needs. */}
+        <span aria-hidden="true" className={`${TYPE} invisible block`}>
+          {LONGEST}
+        </span>
+
         <AnimatePresence mode="wait">
-          <motion.h2
+          <motion.p
             key={WORDS[index]}
-            initial={{ rotateX: -100, opacity: 0 }}
+            initial={{ rotateX: -90, opacity: 0 }}
             animate={{ rotateX: 0, opacity: 1 }}
-            exit={{ rotateX: 100, opacity: 0 }}
-            transition={{ duration: 0.55, ease: "easeInOut" }}
-            style={{ transformOrigin: "50% 50%" }}
-            className="font-display uppercase text-ink font-extrabold leading-[0.9] tracking-tight text-[1.8rem] sm:text-[2.3rem] lg:text-[2.8rem]"
+            exit={{ rotateX: 90, opacity: 0 }}
+            transition={{ duration: 0.5, ease: 'easeInOut' }}
+            style={{ transformOrigin: '50% 50%' }}
+            className={`${TYPE} absolute inset-0 text-ink`}
           >
             {WORDS[index]}
-          </motion.h2>
+          </motion.p>
         </AnimatePresence>
       </motion.div>
     </div>

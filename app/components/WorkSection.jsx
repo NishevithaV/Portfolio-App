@@ -76,9 +76,10 @@ const WorkSection = () => {
                   {experience.role}
                 </h3>
 
-                {/* Monochrome at rest; the company earns its colour on hover. */}
-                <p className="mb-5 font-serif text-lg text-muted transition-colors duration-300 group-hover:text-accent">
-                  <span className="text-muted-soft">@</span> {experience.company}
+                {/* Warms to the accent as the row scrolls into view. */}
+                <p className="mb-5 font-serif text-lg">
+                  <span className="text-muted-soft">@</span>{' '}
+                  <span className="reveal-accent">{experience.company}</span>
                 </p>
 
                 {experience.description?.length > 0 && (
