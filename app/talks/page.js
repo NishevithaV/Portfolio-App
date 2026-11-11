@@ -4,44 +4,35 @@ import Footer from "../components/Footer";
 import TalkCard from "../components/TalkCard";
 import { TALKS } from "../constants";
 import { motion } from "framer-motion";
-import { MicrophoneIcon } from "@heroicons/react/24/outline";
 
 export default function Talks() {
   return (
-    <main className="flex min-h-screen flex-col bg-term-bg pt-16">
+    <main className="flex min-h-screen flex-col bg-bg pt-16">
       <Navbar />
-      <div className="container mx-auto px-6 sm:px-12 py-12 flex-1 flex flex-col">
+      <div className="container mx-auto px-6 sm:px-12 py-16 flex-1 flex flex-col">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
-          className="flex flex-col items-center text-center mb-12"
+          className="mb-16 border-b border-ink pb-8"
         >
-          <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-full border border-term-accent/30 bg-term-surface p-[2px] mb-6 glow-border">
-            <div className="flex items-center justify-center w-full h-full rounded-full bg-term-surface-2">
-              <MicrophoneIcon className="w-8 h-8 sm:w-10 sm:h-10 text-term-accent" />
-            </div>
-          </div>
-
-          <p className="font-mono text-term-accent-2 text-sm mb-2">
-            <span className="text-term-muted">$</span> ls ./talks
-          </p>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-term-text mb-4">
+          <p className="fig-label mb-3">NO. 003 &mdash; SPEAKING</p>
+          <h1 className="font-display uppercase text-5xl sm:text-6xl lg:text-7xl font-extrabold text-ink tracking-tight mb-4">
             Talks
           </h1>
-          <p className="text-lg sm:text-xl text-term-muted max-w-xl">
+          <p className="text-lg sm:text-xl text-muted max-w-xl font-serif">
             I speak at conferences, universities and community events, sharing what I learn as I build.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
           {TALKS.map((talk, index) => (
             <motion.div
               key={talk.id}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="h-full"
+              className="relative h-full hover:z-10"
             >
               <TalkCard
                 title={talk.title}

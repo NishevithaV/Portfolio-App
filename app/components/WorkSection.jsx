@@ -1,113 +1,107 @@
-"use client";
-import React, { useRef } from 'react';
-import { WORKEXPERIENCE } from '../constants';
-import { motion, useScroll, useTransform } from 'framer-motion';
+"use client"
+import React from 'react'
+import dynamic from 'next/dynamic'
+import { motion, useReducedMotion } from 'framer-motion'
+import { WORKEXPERIENCE } from '../constants'
+import useSectionProgress from '../hooks/useSectionProgress'
 
-const SKILL_COLORS = [
-  { text: "text-term-accent", border: "border-term-accent/30", bg: "bg-term-accent/10" },
-  { text: "text-sky-300", border: "border-sky-300/30", bg: "bg-sky-300/10" },
-  { text: "text-term-accent-2", border: "border-term-accent-2/30", bg: "bg-term-accent-2/10" },
-  { text: "text-fuchsia-300", border: "border-fuchsia-300/30", bg: "bg-fuchsia-300/10" },
-  { text: "text-indigo-300", border: "border-indigo-300/30", bg: "bg-indigo-300/10" },
-];
+const WorkCuboid3D = dynamic(() => import('./three/WorkCuboid3D'), { ssr: false })
 
-const TimelineNode = ({ scrollYProgress, threshold }) => {
-  const lit = useTransform(scrollYProgress, [Math.max(threshold - 0.12, 0), threshold], [0, 1]);
-  const scale = useTransform(lit, [0, 1], [0.8, 1.2]);
-  const boxShadow = useTransform(lit, (v) => `0 0 ${6 + v * 14}px rgba(57,255,136,${v * 0.7})`);
-  const backgroundColor = useTransform(lit, [0, 1], ["#161d19", "#39ff88"]);
-  const borderColor = useTransform(lit, [0, 1], ["#2a352e", "#39ff88"]);
-
-  return (
-    <motion.span
-      style={{ scale, boxShadow, backgroundColor, borderColor }}
-      className="block w-3.5 h-3.5 rounded-full border-2"
-    />
-  );
-};
+const RAIL = 92
 
 const WorkSection = () => {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start 0.75", "end 0.35"],
-  });
-
-  const total = WORKEXPERIENCE.length;
+  // 'start center' -> 'end center' means progress tracks the row nearest the
+  // middle of the screen, which is what the cube's quarter-turns represent.
+  const [ref, progress] = useSectionProgress(['start center', 'end center'])
+  const reduced = useReducedMotion()
 
   return (
-    <section id="work" className="border-b border-term-line pb-4 mt-12 sm:mt-20 md:mt-28">
-
-      <motion.p
-        viewport={{ once: true }}
-        whileInView={{ opacity: 1, y: 0 }}
-        initial={{ opacity: 0, y: 30 }}
-        transition={{ duration: 0.8 }}
-        className="text-center font-mono text-term-accent-2 text-sm mb-2"
-      >
-        <span className="text-term-muted">$</span> cat work_experience.log
-      </motion.p>
-      <motion.h1
-        viewport={{ once: true }}
-        whileInView={{ opacity: 1, y: 0 }}
-        initial={{ opacity: 0, y: 40 }}
-        transition={{ duration: 0.8, delay: 0.1 }}
-        className="text-center text-2xl sm:text-3xl mb-16 text-term-text font-semibold"
-        style={{ willChange: "transform", overflowX: "hidden" }}
-      >
+    <section
+      id="work"
+      ref={ref}
+      className="scroll-mt-24 border-t border-ink pb-8 pt-10 sm:pt-14"
+    >
+      <div className="mb-12 flex items-baseline gap-4 sm:mb-16">
+        <span className="section-number text-4xl sm:text-5xl">01</span>
+        <h2 className="font-display text-2xl font-bold uppercase tracking-tight text-ink sm:text-4xl">
           Work Experience
-      </motion.h1>
+        </h2>
+      </div>
 
-      <div ref={containerRef} className="relative max-w-3xl mx-auto">
-        {/* track */}
-        <div className="absolute left-2 top-2 bottom-2 w-px bg-term-line" />
-        <motion.div
-          style={{ scaleY: scrollYProgress }}
-          className="absolute left-2 top-2 bottom-2 w-px bg-term-accent origin-top"
-        />
+      <div className="flex gap-5 sm:gap-10">
+        {/* ---- the rail: one sticky cube for the whole timeline ---- */}
+        <div className="relative hidden shrink-0 sm:block" style={{ width: RAIL }}>
+          <div
+            aria-hidden="true"
+            className="absolute bottom-2 top-2 w-px bg-line"
+            style={{ left: RAIL / 2 }}
+          />
+          <div className="sticky top-[40vh]" style={{ height: RAIL }}>
+            <WorkCuboid3D
+              progress={progress}
+              count={WORKEXPERIENCE.length}
+              reduced={!!reduced}
+              size={RAIL}
+            />
+          </div>
+        </div>
 
-        {WORKEXPERIENCE.map((experience, index) => {
-          const threshold = total === 1 ? 1 : index / (total - 1);
-          return (
-            <div key={index} className="relative flex gap-5 sm:gap-8 pb-12 last:pb-0">
-              <div className="relative z-10 w-4 flex-shrink-0 flex justify-center pt-1.5">
-                <TimelineNode scrollYProgress={scrollYProgress} threshold={threshold} />
-              </div>
-
-              <motion.div
-                whileInView={{ opacity: 1, x: 0 }}
-                initial={{ opacity: 0, x: 60 }}
+        {/* ---- the roles ---- */}
+        <div className="flex min-w-0 flex-1 flex-col gap-10 sm:gap-14">
+          {WORKEXPERIENCE.map((experience, index) => {
+            const isCurrent = experience.year.toLowerCase().includes('present')
+            return (
+              <motion.article
+                key={`${experience.company}-${index}`}
+                initial={{ opacity: 0, y: 32 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-80px' }}
                 transition={{ duration: 0.6 }}
-                viewport={{ once: true, margin: "-80px" }}
-                className="flex-1 min-w-0"
+                className="group relative border border-ink bg-bg p-6 transition-colors duration-300 sm:p-8"
               >
-                <p className="font-mono text-xs sm:text-sm text-term-accent-2 mb-1">[{experience.year}]</p>
-                <h6 className="mb-2 font-semibold text-term-text">
-                  {experience.role} <span className="text-term-muted">@</span>{" "}
-                  <span className="text-term-accent">{experience.company}</span>
-                </h6>
-                <ul className="mb-4 text-term-muted list-disc pl-4 space-y-1">
-                  {experience.description.map((item, idx) => (
-                    <li key={idx}>{item}</li>
-                  ))}
-                </ul>
-                <div className="flex flex-wrap gap-2 mt-2">
-                  {experience.skills.map((skill, i) => {
-                    const c = SKILL_COLORS[i % SKILL_COLORS.length];
-                    return (
-                      <span
-                        key={i}
-                        className={`rounded border ${c.border} ${c.bg} px-2 py-1 font-mono text-xs font-medium ${c.text}`}
-                      >
+                <div className="mb-3 flex flex-wrap items-center gap-3">
+                  <span className="fig-label">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <span aria-hidden="true" className="h-px w-6 bg-line-strong" />
+                  <p className="fig-label">{experience.year}</p>
+                  {isCurrent && (
+                    <span className="fig-label border border-line px-2 py-0.5 transition-colors duration-300 group-hover:border-accent group-hover:!text-accent">
+                      Current
+                    </span>
+                  )}
+                </div>
+
+                <h3 className="mb-1 font-display text-2xl font-bold uppercase tracking-tight text-ink sm:text-3xl">
+                  {experience.role}
+                </h3>
+
+                {/* Monochrome at rest; the company earns its colour on hover. */}
+                <p className="mb-5 font-serif text-lg text-muted transition-colors duration-300 group-hover:text-accent">
+                  <span className="text-muted-soft">@</span> {experience.company}
+                </p>
+
+                {experience.description?.length > 0 && (
+                  <ul className="mb-5 max-w-2xl list-disc space-y-1.5 pl-4 font-serif text-muted">
+                    {experience.description.map((item, idx) => (
+                      <li key={idx}>{item}</li>
+                    ))}
+                  </ul>
+                )}
+
+                {experience.skills?.length > 0 && (
+                  <div className="flex flex-wrap gap-2">
+                    {experience.skills.map((skill, i) => (
+                      <span key={i} className="fig-label border border-line px-3 py-1">
                         {skill}
                       </span>
-                    );
-                  })}
-                </div>
-              </motion.div>
-            </div>
-          );
-        })}
+                    ))}
+                  </div>
+                )}
+              </motion.article>
+            )
+          })}
+        </div>
       </div>
     </section>
   )

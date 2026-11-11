@@ -1,48 +1,97 @@
 "use client"
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLinkedin } from '@fortawesome/free-brands-svg-icons'
+import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 import { motion } from 'framer-motion'
 
+const LINKS = [
+  { href: 'mailto:nishevitha.v@gmail.com', label: 'Email', icon: faPaperPlane },
+  {
+    href: 'https://www.linkedin.com/in/nishevitha-venkatesh/',
+    label: 'LinkedIn',
+    icon: faLinkedin,
+  },
+  { href: 'https://github.com/NishevithaV', label: 'GitHub', icon: faGithub },
+]
+
+/**
+ * Inverted closing section, bookending the hero so the page begins and ends
+ * in black with the white work held between them.
+ */
 const ContactSection = () => {
   return (
-
-    <section className="flex flex-col items-center justify-center text-center mb-4 gap-6 mt-4 w-full max-w-4xl mx-auto md:flex-row md:justify-between md:text-right md:gap-12" id="contact">
-
+    <section id="contact" className="invert-section scroll-mt-24 w-full">
+      <div className="container mx-auto px-6 py-20 sm:px-12 sm:py-28">
         <motion.div
-          className="w-full md:w-1/2 flex flex-col items-center md:items-end"
-          initial={{ opacity: 0, x: -80 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
           viewport={{ once: true }}
+          className="mb-10 flex items-baseline gap-4"
         >
-            <p className="font-mono text-term-accent-2 text-sm mb-2">
-              <span className="text-term-muted">$</span> contact --send
-            </p>
-            <h4 className="text-3xl font-bold text-term-text mb-2">Let&apos;s Connect</h4>
-            <p className="text-term-muted text-base sm:text-lg mb-3 mt-2 md:mt-1">
-                {" "}
-                Have questions, ideas or opportunities? I&apos;m excited to hear from you. Send me a message!
-            </p>
+          <span className="section-number text-4xl sm:text-5xl">03</span>
+          <h2 className="font-display text-2xl font-bold uppercase tracking-tight text-ink sm:text-4xl">
+            Let&apos;s Connect
+          </h2>
         </motion.div>
 
-        <motion.div
-          className="w-full md:w-1/2 flex justify-center md:justify-start"
-          initial={{ opacity: 0, x: 80 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
+        <motion.a
+          href="mailto:nishevitha.v@gmail.com"
+          data-cursor="view"
+          data-cursor-label="Say hi"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
           viewport={{ once: true }}
+          className="group block w-full"
         >
-          <div className="flex flex-row gap-5 mt-0 md:mt-0 md:gap-6 lg:gap-7">
-              <a href="mailto:nishevitha.v@gmail.com" aria-label="Email" className="p-3 rounded-md border border-term-line text-term-muted hover:text-term-accent hover:border-term-accent transition-colors duration-200 glow-border-hover">
-                <FontAwesomeIcon icon={faPaperPlane} className="w-8 h-8 md:w-10 md:h-10" />
+          {/* Sized to fit the container at every width: the address is long,
+              so the cap is well below what 8vw would give on a wide screen. */}
+          <span className="block break-words font-display text-[clamp(1.6rem,5.6vw,4.4rem)] font-extrabold uppercase leading-[0.95] tracking-tight text-ink transition-colors duration-300 group-hover:text-accent">
+            nishevitha.v@gmail.com
+          </span>
+          <span
+            aria-hidden="true"
+            className="mt-4 block h-px w-full origin-left scale-x-100 bg-line-strong transition-colors duration-300 group-hover:bg-accent"
+          />
+        </motion.a>
+
+        <div className="mt-10 flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
+          <motion.p
+            className="max-w-md font-serif text-base text-muted sm:text-lg"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.7 }}
+            viewport={{ once: true }}
+          >
+            Have questions, ideas or opportunities? I&apos;m excited to hear from
+            you &mdash; send me a message.
+          </motion.p>
+
+          <motion.div
+            className="flex gap-3"
+            initial={{ opacity: 0, x: 24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            viewport={{ once: true }}
+          >
+            {LINKS.map((l) => (
+              <a
+                key={l.label}
+                href={l.href}
+                target={l.href.startsWith('http') ? '_blank' : undefined}
+                rel={l.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                aria-label={l.label}
+                data-cursor="link"
+                className="border border-line p-3.5 text-ink transition-colors duration-200 hover:border-ink hover:bg-ink hover:text-bg"
+              >
+                <FontAwesomeIcon icon={l.icon} className="h-5 w-5" />
               </a>
-              <a href="https://www.linkedin.com/in/nishevitha-venkatesh/" target="_blank" rel="noopener nonreferrer" aria-label="LinkedIn" className="p-3 rounded-md border border-term-line text-term-muted hover:text-term-accent hover:border-term-accent transition-colors duration-200 glow-border-hover">
-                <FontAwesomeIcon icon={faLinkedin} className="w-8 h-8 md:w-10 md:h-10" />
-              </a>
-            </div>
-        </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </div>
     </section>
   )
 }

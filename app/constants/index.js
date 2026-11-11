@@ -43,7 +43,7 @@ export const WORKEXPERIENCE = [
         role:"Student Ambassador",
         company:"ShiftKey Labs",
         description: [
-            <>Led a year-long startup program with Volta for Atlantic Canada, supporting early-stage founders from recruitment to Demo Day (featured <a href="https://lnkd.in/eXynyGYn" target="_blank" rel="noopener noreferrer" className="no-underline text-term-accent">here</a>).</>,
+            <>Led a year-long startup program with Volta for Atlantic Canada, supporting early-stage founders from recruitment to Demo Day (featured <a href="https://lnkd.in/eXynyGYn" target="_blank" rel="noopener noreferrer" className="no-underline text-accent">here</a>).</>,
             "Organized hackathons, tech talks, workshops, and all things student startup community."
         ],
         skills: ["Program Management", "Event Planning", "Resource Management", "Team Collaboration"],

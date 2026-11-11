@@ -13,19 +13,22 @@ const tailwindConfig = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        term: {
-          bg: "var(--term-bg)",
-          surface: "var(--term-surface)",
-          "surface-2": "var(--term-surface-2)",
-          line: "var(--term-line)",
-          "line-strong": "var(--term-line-strong)",
-          muted: "var(--term-muted)",
-          text: "var(--term-text)",
-          accent: "var(--term-accent)",
-          "accent-2": "var(--term-accent-2)",
-        },
+        bg: "var(--bg)",
+        surface: "var(--surface)",
+        line: "var(--line)",
+        "line-strong": "var(--line-strong)",
+        muted: "var(--muted)",
+        "muted-soft": "var(--muted-soft)",
+        ink: "var(--ink)",
+        accent: "var(--accent)",
+        // Fixed values, for the rare case a colour must not follow the
+        // surrounding `.invert-section` token overrides.
+        "bg-invert": "#0a0a0a",
+        "ink-invert": "#f5f5f5",
       },
       fontFamily: {
+        display: ["var(--font-big-shoulders)", "ui-sans-serif", "sans-serif"],
+        serif: ["var(--font-newsreader)", "Georgia", "Cambria", "serif"],
         mono: ["var(--font-jetbrains-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
       },
     },

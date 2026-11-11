@@ -1,20 +1,19 @@
 import React from 'react'
 
 const Footer = () => {
-  const getYear = () => new Date().getFullYear();
+  const year = new Date().getFullYear()
 
   return (
-    <footer className="footer border-t border-term-line text-term-text mt-12 font-mono">
-        <div className="container p-8 flex justify-between items-center w-full">
+    <footer className="invert-section w-full border-t border-line">
+      <div className="container mx-auto flex w-full flex-col gap-4 px-6 py-8 sm:flex-row sm:items-center sm:justify-between sm:px-12">
+        <p className="font-display text-xl font-bold uppercase tracking-tight text-ink">
+          N.V.
+        </p>
 
-          <p className="text-term-accent font-semibold text-xl text-left">
-            NV<span className="cursor-blink text-term-accent">_</span>
-          </p>
-
-            <p className="text-xs text-right text-term-muted">
-              <span className="text-term-accent-2">$</span> echo &quot;&copy; {getYear()} Nishevitha Venkatesh&quot; <br /> All rights reserved.
-            </p>
-        </div>
+        <p className="fig-label sm:text-right">
+          &copy; {year} Nishevitha Venkatesh &mdash; Built with Next.js &amp; three.js
+        </p>
+      </div>
     </footer>
   )
 }

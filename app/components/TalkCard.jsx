@@ -1,48 +1,63 @@
 import React from 'react'
 import Link from 'next/link'
-import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline"
+import { ArrowUpRightIcon } from '@heroicons/react/24/outline'
+import TiltCard from './TiltCard'
 
-const TalkCard = ({ title, desc, img, type, link, imgFit = "cover" }) => {
-  const isLinked = link && link !== "#"
-
-  const cardImage = (
-    <div
-      className="h-56 md:h-64 rounded-t-xl relative group border-b border-term-line"
-      style={{
-        backgroundImage: `url(${img})`,
-        backgroundSize: imgFit,
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        backgroundColor: "var(--term-surface-2)",
-      }}
-    >
-      {type && (
-        <span className="absolute top-3 left-3 text-xs font-mono font-medium px-3 py-1 rounded-full bg-term-bg/80 text-term-accent border border-term-accent/30">
-          {type}
-        </span>
-      )}
-      {isLinked && (
-        <div className="overlay absolute inset-0 bg-term-bg bg-opacity-0 hidden group-hover:flex group-hover:bg-opacity-80 transition-all duration-500 items-center justify-center rounded-t-xl">
-          <div className="h-14 w-14 border-2 rounded-full border-term-line hover:border-term-accent flex items-center justify-center group/icon">
-            <ArrowTopRightOnSquareIcon className="h-7 w-7 text-term-muted group-hover/icon:text-term-accent" />
-          </div>
-        </div>
-      )}
-    </div>
-  )
+/**
+ * Shared card for talks and articles. Same colour rule as ProjectCard: the
+ * image is monochrome until hovered, rather than permanently desaturated.
+ */
+const TalkCard = ({ title, desc, img, type, link, imgFit = 'cover' }) => {
+  const isLinked = link && link !== '#'
 
   const content = (
-    <div className="flex flex-col bg-term-surface border border-term-line rounded-xl overflow-hidden h-full glow-border-hover transition-shadow duration-300">
-      {cardImage}
-      <div className="py-5 px-4 flex flex-col flex-grow">
-        <h5 className="text-term-text font-semibold text-base mb-2">{title}</h5>
-        <p className="text-term-muted text-sm leading-relaxed">{desc}</p>
-      </div>
+    <div className="group relative h-full">
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 border border-ink bg-ink opacity-0 transition-all duration-300 group-hover:translate-x-2.5 group-hover:translate-y-2.5 group-hover:opacity-100"
+      />
+      <TiltCard rotateRange={8} lift className="relative">
+        <div className="flex h-full flex-col border border-ink bg-bg">
+          <div className="relative h-52 shrink-0 overflow-hidden border-b border-ink bg-surface sm:h-56">
+            <div
+              className="reveal-colour absolute inset-0"
+              style={{
+                backgroundImage: `url(${img})`,
+                backgroundSize: imgFit,
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+              }}
+            />
+            {isLinked && (
+              <div className="scrim-ink absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                <span className="flex h-12 w-12 items-center justify-center border border-bg">
+                  <ArrowUpRightIcon className="h-5 w-5 text-bg" />
+                </span>
+              </div>
+            )}
+          </div>
+
+          <div className="flex flex-grow flex-col px-5 py-5">
+            {type && <p className="fig-label mb-2">{type}</p>}
+            <h3 className="mb-2 font-display text-lg font-bold uppercase tracking-tight text-ink transition-colors duration-300 group-hover:text-accent">
+              {title}
+            </h3>
+            <p className="font-serif text-sm leading-relaxed text-muted">{desc}</p>
+          </div>
+        </div>
+      </TiltCard>
     </div>
   )
 
   return isLinked ? (
-    <Link href={link} target="_blank" rel="noopener noreferrer" className="block h-full">
+    <Link
+      href={link}
+      target="_blank"
+      rel="noopener noreferrer"
+      data-cursor="view"
+      data-cursor-label="Open"
+      className="block h-full"
+    >
       {content}
     </Link>
   ) : (

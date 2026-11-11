@@ -1,9 +1,18 @@
-import { Geist, JetBrains_Mono } from "next/font/google";
+import { Big_Shoulders_Display, Newsreader, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import SiteChrome from "./components/SiteChrome";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const bigShoulders = Big_Shoulders_Display({
+  variable: "--font-big-shoulders",
   subsets: ["latin"],
+  weight: ["500", "600", "700", "800", "900"],
+});
+
+const newsreader = Newsreader({
+  variable: "--font-newsreader",
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  weight: ["400", "500", "600"],
 });
 
 const jetbrainsMono = JetBrains_Mono({
@@ -13,7 +22,8 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata = {
   title: "Nishevitha Venkatesh",
-  description: "A computer science student passionate about cloud computing, web development, and driving innovation in the tech community. This summer, I'll be interning as a Technology Analyst at Morgan Stanley. Explore my work, projects, and let's connect!",
+  description:
+    "Product Engineer at SnapTrade (YC W22), previously Morgan Stanley. I build software across AI, fintech and full-stack systems. Explore my work, projects, talks and writing.",
   keywords: [
     "Nishevitha Venkatesh", 
     "Fintech",
@@ -24,8 +34,8 @@ export const metadata = {
   ],
   openGraph : {
     title: "Nishevitha Venkatesh",
-    description : 
-      "Passionate about cloud computing, web development, and fintech. This summer, I'll be interning as a Technology Analyst at Morgan Stanley. Check out my projects and let's connect!",
+    description:
+      "Product Engineer at SnapTrade (YC W22), previously Morgan Stanley. I build software across AI, fintech and full-stack systems.",
     url: "https://nishevithavenkatesh.com",
     siteName: "Nishevitha Venkatesh",
     images: [
@@ -42,11 +52,33 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${jetbrainsMono.variable} antialiased bg-term-bg text-term-text`}
+        className={`${bigShoulders.variable} ${newsreader.variable} ${jetbrainsMono.variable} antialiased bg-bg text-ink font-serif`}
       >
-        {children}
+        {/*
+          Decide before first paint whether the intro still has to play, so the
+          CSS cover in globals.css can hold the screen until the React overlay
+          mounts. Without this the inverted hero flashes on every load.
+        */}
+        {/*
+          The hero's 3D wordmark fetches this typeface as soon as it mounts.
+          Preloading it here means the geometry is ready the moment the intro
+          clears, instead of the hero briefly rendering empty.
+        */}
+        <link
+          rel="preload"
+          as="fetch"
+          href="/fonts/big-shoulders-800.typeface.json"
+          crossOrigin="anonymous"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){try{document.documentElement.dataset.intro=sessionStorage.getItem('nv.intro.played')==='1'?'done':'pending'}catch(e){document.documentElement.dataset.intro='pending'}})();",
+          }}
+        />
+        <SiteChrome>{children}</SiteChrome>
       </body>
     </html>
   );

@@ -1,74 +1,106 @@
 "use client"
 import Link from 'next/link'
-import React, { useState, useEffect } from 'react'
-import NavList from "./NavList"
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid"
+import React, { useEffect, useState } from 'react'
+import { motion, useScroll, useSpring } from 'framer-motion'
+import NavList from './NavList'
 import MenuOverlay from './MenuOverlay'
 
 const navElements = [
-    { title: "work", path: "/#work" },
-    { title: "projects", path: "/#projects" },
-    { title: "talks", path: "/talks" },
-    { title: "articles", path: "/articles" },
-    { title: "contact", path: "/#contact" },
+  { title: 'work', path: '/#work' },
+  { title: 'projects', path: '/#projects' },
+  { title: 'talks', path: '/talks' },
+  { title: 'articles', path: '/articles' },
+  { title: 'contact', path: '/#contact' },
 ]
 
+/**
+ * Fixed nav that flips to the inverted palette while it sits over the hero.
+ *
+ * Rather than blend-moding the bar (which looks unpredictable over imagery),
+ * an IntersectionObserver watches the hero and the nav adopts `.invert-section`
+ * tokens while it overlaps it - so the bar is always deliberately readable.
+ */
 const Navbar = () => {
-    const [navigationOpen, setNavigationOpen] = useState(false);
+  const [navigationOpen, setNavigationOpen] = useState(false)
+  const [overHero, setOverHero] = useState(true)
 
-    useEffect(() => {
-        const handleResize = () => {
-            if (window.innerWidth >= 768) {
-                setNavigationOpen(false);
-            }
-        }
-        window.addEventListener("resize", handleResize);
-        return () => window.removeEventListener("resize", handleResize);
-    }, [])
+  const { scrollYProgress } = useScroll()
+  const progress = useSpring(scrollYProgress, { stiffness: 180, damping: 36, mass: 0.3 })
 
-    return (
-        <>
-            <nav className="fixed top-0 left-0 right-0 z-20 bg-term-bg/90 backdrop-blur-sm border-b border-term-line">
-                <div className="flex items-center justify-between px-4 sm:px-6 h-16">
-                    <Link href={"/"} className="font-mono text-lg lg:text-xl text-term-text tracking-tight shrink-0">
-                        <span className="text-term-accent">nishevitha</span>
-                        <span className="text-term-muted">@</span>
-                        <span className="text-term-accent-2">dev</span>
-                        <span className="text-term-muted">:~$</span>
-                        <span className="cursor-blink text-term-accent">_</span>
-                    </Link>
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) setNavigationOpen(false)
+    }
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
-                    {/* Mobile hamburger */}
-                    <button
-                        className="md:hidden flex items-center px-3 py-2 border rounded border-term-line text-term-text hover:text-term-accent hover:border-term-accent transition-colors"
-                        onClick={() => setNavigationOpen(!navigationOpen)}
-                        aria-label="Toggle menu"
-                    >
-                        {navigationOpen
-                            ? <XMarkIcon className="h-5 w-5" />
-                            : <Bars3Icon className="h-5 w-5" />
-                        }
-                    </button>
-
-                    {/* Desktop nav pill */}
-                    <div className="hidden md:flex items-center bg-term-surface border border-term-line rounded-full px-2 py-1.5">
-                        <ul className="flex items-center gap-1 font-mono">
-                            {navElements.map((element, index) => (
-                                <li key={index}>
-                                    <NavList href={element.path} title={element.title} />
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-
-            {/* Overlay rendered outside <nav> so it's not trapped in its stacking context */}
-            {navigationOpen && (
-                <MenuOverlay links={navElements} closeMenu={() => setNavigationOpen(false)} />
-            )}
-        </>
+  useEffect(() => {
+    const hero = document.getElementById('hero')
+    if (!hero) {
+      setOverHero(false)
+      return
+    }
+    // Fire as the hero's bottom edge passes under the bar's height.
+    const io = new IntersectionObserver(
+      ([entry]) => setOverHero(entry.isIntersecting),
+      { rootMargin: '-64px 0px 0px 0px', threshold: 0 },
     )
+    io.observe(hero)
+    return () => io.disconnect()
+  }, [])
+
+  return (
+    <>
+      <nav
+        className={`fixed inset-x-0 top-0 z-40 transition-colors duration-500 ${
+          overHero
+            ? 'invert-section !bg-transparent'
+            : 'surface-translucent border-b border-line backdrop-blur-md'
+        }`}
+      >
+        <div className="flex h-16 items-center justify-between px-6 sm:px-10">
+          <Link
+            href="/"
+            data-cursor="link"
+            className="shrink-0 font-display text-xl uppercase tracking-tight text-ink"
+          >
+            Nishevitha V.
+          </Link>
+
+          <button
+            className="flex items-center border border-line px-3 py-2 text-ink transition-colors hover:border-ink md:hidden"
+            onClick={() => setNavigationOpen(true)}
+            aria-label="Open menu"
+            aria-expanded={navigationOpen}
+          >
+            <span className="fig-label !text-[0.6rem]" style={{ color: 'inherit' }}>
+              Menu
+            </span>
+          </button>
+
+          <ul className="hidden items-center gap-1 md:flex">
+            {navElements.map((element) => (
+              <li key={element.title}>
+                <NavList href={element.path} title={element.title} />
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* reading progress */}
+        <motion.div
+          aria-hidden="true"
+          style={{ scaleX: progress, originX: 0 }}
+          className="h-px w-full bg-ink"
+        />
+      </nav>
+
+      {navigationOpen && (
+        <MenuOverlay links={navElements} closeMenu={() => setNavigationOpen(false)} />
+      )}
+    </>
+  )
 }
 
 export default Navbar

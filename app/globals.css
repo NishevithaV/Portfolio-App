@@ -2,85 +2,264 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --term-bg: #0a0d0b;
-  --term-surface: #101512;
-  --term-surface-2: #161d19;
-  --term-line: #1e2721;
-  --term-line-strong: #2a352e;
-  --term-muted: #7f9188;
-  --term-text: #e7f3ec;
-  --term-accent: #39ff88;
-  --term-accent-2: #ffb454;
+/* ===========================================================================
+   Black & white design system.
 
-  --background: var(--term-bg);
-  --foreground: var(--term-text);
+   Every colour is a CSS variable resolved at the point of use, so a section can
+   flip to its inverse simply by redefining the variables locally (see
+   `.invert-section` below) - no per-component dark variants required.
+
+   Colour is deliberately absent at rest. `--accent` only ever appears on hover
+   or as an element enters view; see `.reveal-colour`.
+   =========================================================================== */
+
+:root {
+  --bg: #ffffff;
+  --surface: #f4f4f4;
+  --ink: #111111;
+
+  /* Two greys: `muted` is safe for body copy (4.8:1 on white), `muted-soft` is
+     the reference site's lighter grey, reserved for large or decorative type
+     where contrast rules are not in play. */
+  --muted: #6e6e6e;
+  --muted-soft: #b2b2b2;
+
+  --line: rgba(17, 17, 17, 0.14);
+  --line-strong: rgba(17, 17, 17, 0.38);
+
+  --accent: #b2311c;
+
+  --background: var(--bg);
+  --foreground: var(--ink);
+
+  --grid: 44px;
+}
+
+/* Inverted sections: hero, contact, footer, loader. Redefining the tokens here
+   flips every `bg-bg` / `text-ink` / `border-line` / `text-muted` descendant. */
+.invert-section {
+  --bg: #0a0a0a;
+  --surface: #161616;
+  --ink: #f5f5f5;
+  --muted: #9a9a9a;
+  --muted-soft: #6e6e6e;
+  --line: rgba(245, 245, 245, 0.16);
+  --line-strong: rgba(245, 245, 245, 0.42);
+
+  background-color: var(--bg);
+  color: var(--ink);
 }
 
 * {
-  border-color: var(--term-line);
+  border-color: var(--line);
+}
+
+html {
+  scrollbar-color: var(--line-strong) var(--bg);
 }
 
 body {
   color: var(--foreground);
-  background-color: var(--term-bg);
+  background-color: var(--bg);
+  font-family: var(--font-newsreader), Georgia, serif;
+  position: relative;
+}
+
+/* Fine technical grid, fixed so it reads as graph paper the content sits on. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.5;
   background-image:
-    linear-gradient(rgba(57, 255, 136, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(57, 255, 136, 0.05) 1px, transparent 1px);
-  background-size: 44px 44px;
-  background-attachment: fixed;
-  font-family: Arial, Helvetica, sans-serif;
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: var(--grid) var(--grid);
+  background-position: -1px -1px;
+}
+
+/* Film grain, kept very low so it textures without muddying the whites. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+main,
+nav,
+footer,
+section,
+header {
+  position: relative;
+  z-index: 1;
 }
 
 ::selection {
-  background: rgba(57, 255, 136, 0.3);
-  color: var(--term-text);
+  background: var(--ink);
+  color: var(--bg);
 }
 
-/* Terminal-style scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--term-bg);
+  background: var(--bg);
 }
 ::-webkit-scrollbar-thumb {
-  background-color: var(--term-line-strong);
-  border-radius: 999px;
-  border: 2px solid var(--term-bg);
+  background-color: var(--line-strong);
+  border: 2px solid var(--bg);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background-color: var(--term-accent);
-}
-html {
-  scrollbar-color: var(--term-line-strong) var(--term-bg);
+  background-color: var(--ink);
 }
 
-@keyframes cursor-blink {
-  0%, 45% { opacity: 1; }
-  50%, 100% { opacity: 0; }
+/* --- document / technical-journal utilities --- */
+
+.fig-label {
+  font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.7rem;
+  color: var(--muted);
 }
 
-.cursor-blink {
-  animation: cursor-blink 1s steps(1) infinite;
+.section-number {
+  font-family: var(--font-big-shoulders), sans-serif;
+  font-weight: 600;
+  color: var(--line-strong);
+  font-variant-numeric: tabular-nums;
 }
+
+.doc-rule {
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--line);
+  height: 3px;
+}
+
+.hairline {
+  box-shadow: 0 0 0 1px var(--line);
+}
+
+.hairline-hover {
+  transition: box-shadow 0.25s ease;
+}
+.hairline-hover:hover {
+  box-shadow: 0 0 0 1px var(--ink);
+}
+
+/* --- the colour rule -------------------------------------------------------
+   Media is monochrome at rest and earns its colour back on hover, or once it
+   has entered the viewport (`.is-live`, set by an IntersectionObserver).
+   This is the single place that behaviour is defined. */
+
+.reveal-colour {
+  filter: grayscale(1) contrast(1.06);
+  transition: filter 0.55s cubic-bezier(0.22, 1, 0.36, 1), transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.group:hover .reveal-colour,
+.reveal-colour:hover,
+.reveal-colour.is-live {
+  filter: grayscale(0) contrast(1);
+}
+
+/* --- focus: never remove the ring, just restyle it to match --------------- */
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* The custom cursor hides the native one, but only once it has actually
+   mounted and only for fine pointers - so touch, keyboard and no-JS users
+   always keep a real cursor. */
+html[data-custom-cursor="true"],
+html[data-custom-cursor="true"] * {
+  cursor: none;
+}
+
+/* --- Lenis smooth scroll (required by the library) ------------------------ */
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* --- reduced motion: one global off-switch -------------------------------- */
 
 @media (prefers-reduced-motion: reduce) {
-  .cursor-blink {
-    animation: none;
-    opacity: 1;
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal-colour {
+    filter: none;
+  }
+
+  html[data-custom-cursor="true"],
+  html[data-custom-cursor="true"] * {
+    cursor: auto;
   }
 }
 
-.text-glow {
-  text-shadow: 0 0 18px rgba(57, 255, 136, 0.35);
+/* ---------------------------------------------------------------------------
+   Intro hand-off. A blocking script in layout.js sets `data-intro` on <html>
+   before first paint; this cover then holds the screen in the gap between
+   first paint and the React intro overlay mounting, so the inverted hero never
+   flashes through. ScreenPusher sets `data-intro="playing"` on mount, which
+   retires the cover while its own opaque overlay is on screen.
+
+   `body::before` and `body::after` are already taken by the grain and the
+   grid, so this uses `html::before` - a sibling of <body> in the root stacking
+   context, which is why z-index 99 sits above the page but below the overlay.
+   --------------------------------------------------------------------------- */
+
+html[data-intro="pending"]::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  background: #ffffff;
+  pointer-events: none;
 }
 
-.glow-border {
-  box-shadow: 0 0 0 1px var(--term-line), 0 0 24px -8px rgba(57, 255, 136, 0.15);
+/* ---------------------------------------------------------------------------
+   Translucent surfaces.
+
+   Tailwind's `/opacity` modifier cannot work on these tokens: the colours are
+   raw `var(--x)` values rather than bare channel triplets, so `bg-bg/85`
+   compiles to an invalid colour and silently renders transparent. `color-mix`
+   gives the same result and still follows `.invert-section` overrides.
+   --------------------------------------------------------------------------- */
+
+.surface-translucent {
+  background-color: color-mix(in srgb, var(--bg) 86%, transparent);
 }
 
-.glow-border-hover:hover {
-  box-shadow: 0 0 0 1px rgba(57, 255, 136, 0.4), 0 0 32px -6px rgba(57, 255, 136, 0.35);
+.scrim-ink {
+  background-color: color-mix(in srgb, var(--ink) 72%, transparent);
 }
