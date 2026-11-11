@@ -4,7 +4,7 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { ContactShadows } from '@react-three/drei'
 
 const INK = "#121212"
-const ACCENT = "#b2311c"
+const ACCENT = "#9d3d4f"
 
 const Gem = () => {
   const ref = useRef(null)

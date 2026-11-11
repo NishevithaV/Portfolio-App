@@ -17,6 +17,10 @@ import { motion, useMotionValue, useSpring } from 'framer-motion'
  * only for fine pointers, so touch users, keyboard users and anyone hitting a
  * JS error always keep a real pointer. See the `html[data-custom-cursor]` rule
  * in globals.css.
+ *
+ * This must never be hidden at a breakpoint: `cursor: none` is driven by the
+ * pointer type, not the viewport, so a width-based `hidden` left anyone with a
+ * narrow window and a mouse no cursor at all.
  */
 
 const VARIANTS = {
@@ -110,7 +114,7 @@ const Cursor = () => {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none fixed inset-0 z-[200] hidden md:block"
+      className="pointer-events-none fixed inset-0 z-[200]"
       style={{ mixBlendMode: 'difference' }}
     >
       {/* trailing ring */}

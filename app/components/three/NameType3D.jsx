@@ -18,7 +18,7 @@ import * as THREE from 'three'
 
 const FONT = '/fonts/big-shoulders-800.typeface.json'
 const LINES = ['NISHEVITHA', 'VENKATESH']
-const ACCENT = new THREE.Color('#b2311c')
+const ACCENT = new THREE.Color('#9d3d4f')
 const BLACK = new THREE.Color('#000000')
 
 const GEOM = {

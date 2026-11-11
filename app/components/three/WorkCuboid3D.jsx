@@ -23,8 +23,8 @@ const INK = new THREE.Color('#111111')
 // Exactly the page accent, so the cube matches the company names beside it.
 // The lights below deliberately sum to roughly 1.0: any brighter and the lit
 // faces multiply past the base colour, which desaturates red into dusty pink.
-const RED = new THREE.Color('#b2311c')
-const FACE = new THREE.Color('#f7f7f7')
+const RED = new THREE.Color('#9d3d4f')
+const FACE = new THREE.Color('#f6e6e9')
 
 // Scratch colour, reused each frame so the loop allocates nothing.
 const TARGET = new THREE.Color()
@@ -98,7 +98,7 @@ const Cube = ({ progress, count, reduced }) => {
       <RoundedBox args={[1.6, 1.6, 1.6]} radius={0.1} smoothness={4}>
         <meshStandardMaterial
           ref={material}
-          color="#f7f7f7"
+          color="#f6e6e9"
           roughness={0.7}
           metalness={0}
           emissive={INK}

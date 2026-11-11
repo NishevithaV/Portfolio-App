@@ -37,31 +37,65 @@ const Hero = () => {
         <span className="fig-label">No. 001 / Portfolio</span>
       </div>
 
-      {/* Main block, centred in the space between the label and the scroll cue.
+      {/* Main block, centred between the label and the scroll cue.
 
-          A 12-column grid rather than two flex children pushed apart: the gap
-          between the copy and the portrait is then a deliberate column of the
-          same grid everything else uses, instead of whatever space happens to
-          be left over at a given window width. */}
+          Three grid children rather than two, so the portrait can sit beside
+          the headline on a phone and span the full left column on a desktop,
+          without duplicating any markup:
+
+            phone    headline | portrait        desktop   headline | portrait
+                     supporting (full width)              supporting| (spans)
+
+          On a phone the portrait used to land underneath the social links,
+          reading as something left over at the bottom of the screen. */}
       <div className="container mx-auto flex min-h-0 flex-1 items-center px-6 py-10 sm:px-12">
-        <div className="grid w-full grid-cols-1 items-center gap-10 sm:grid-cols-12 sm:gap-6">
+        <div className="grid w-full grid-cols-12 items-start gap-x-5 gap-y-7 sm:gap-x-6 sm:gap-y-8">
+          {/* headline */}
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="min-w-0 sm:col-span-8 lg:col-span-7"
+            className="col-span-7 min-w-0 self-center sm:col-span-7 sm:row-start-1 sm:self-end"
           >
-            {/* The name reads as the standing label and the rotating role is
-                the headline, rather than the other way round. */}
-            <h1 className="font-display text-[clamp(1.05rem,2vw,1.6rem)] font-bold uppercase leading-none tracking-[0.04em] text-ink">
+            <h1 className="font-display text-[clamp(0.95rem,2vw,1.6rem)] font-bold uppercase leading-none tracking-[0.04em] text-ink">
               Nishevitha Venkatesh
             </h1>
 
-            <div className="mt-4">
+            <div className="mt-3 sm:mt-4">
               <RoleRotator />
             </div>
+          </motion.div>
 
-            <div className="doc-rule my-6 w-full max-w-sm" />
+          {/* portrait: beside the headline on a phone, spanning both rows and
+              vertically centred from sm up */}
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.25 }}
+            className="group col-span-5 self-start sm:col-span-4 sm:col-start-9 sm:row-span-2 sm:row-start-1 sm:ml-auto sm:w-full sm:max-w-[320px] sm:self-center"
+          >
+            <div
+              className="relative aspect-[4/5] w-full overflow-hidden border border-line"
+              data-cursor="view"
+              data-cursor-label="Hello"
+            >
+              <img
+                src="/images/profile_pic.jpeg"
+                alt="Nishevitha Venkatesh"
+                className="reveal-colour h-full w-full object-cover"
+              />
+            </div>
+            <p className="fig-label mt-2">Fig. 1 / The author</p>
+          </motion.div>
+
+          {/* supporting copy */}
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.18 }}
+            className="col-span-12 min-w-0 sm:col-span-7 sm:row-start-2"
+          >
+            <div className="doc-rule mb-5 w-full max-w-sm" />
 
             <p className="max-w-lg font-serif text-base leading-relaxed text-muted">
               I&rsquo;m a software engineer who likes turning hard problems into
@@ -83,31 +117,6 @@ const Hero = () => {
                 </a>
               ))}
             </div>
-          </motion.div>
-
-          {/* Width comes from the grid column, so it scales smoothly instead of
-              sticking at the floor of a clamp, and it is centred against the
-              copy rather than dropped into the bottom corner. It is also no
-              longer hidden below sm - vanishing at one width was the other half
-              of it "changing size and disappearing". */}
-          <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.25 }}
-            className="group w-[160px] max-w-full sm:col-span-4 sm:col-start-9 sm:ml-auto sm:w-full sm:max-w-[320px]"
-          >
-            <div
-              className="relative aspect-[4/5] w-full overflow-hidden border border-line"
-              data-cursor="view"
-              data-cursor-label="Hello"
-            >
-              <img
-                src="/images/profile_pic.jpeg"
-                alt="Nishevitha Venkatesh"
-                className="reveal-colour h-full w-full object-cover"
-              />
-            </div>
-            <p className="fig-label mt-2">Fig. 1 / The author</p>
           </motion.div>
         </div>
       </div>
